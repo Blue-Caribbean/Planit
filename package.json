@@ -1,0 +1,35 @@
+{
+  "name": "blue-ocean",
+  "description": "We're team Carribbean, and we're comprised of: * [Nick Sabadicci](https://github.com/Symbuh) * [Laura Nielson](https://github.com/VioletGlen) * [Jack Pronske](https://github.com/jackpronske/) * [Zachary Shold](https://github.com/Prollux/) * [Lerroy Mwaghore](https://github.com/lmwaghore) * [Austin Killough](https://github.com/austinbkillo) * [Ross Russell](https://github.com/wolfshirts)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/webpack -w",
+    "start": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carribbean/blue-ocean.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carribbean/blue-ocean/issues"
+  },
+  "homepage": "https://github.com/Carribbean/blue-ocean#readme",
+  "dependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
+  }
+}
