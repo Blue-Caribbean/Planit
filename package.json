@@ -1,0 +1,19 @@
+{
+  "name": "blue-ocean",
+  "description": "We're team Carribbean, and we're comprised of: * [Nick Sabadicci](https://github.com/Symbuh) * [Laura Nielson](https://github.com/VioletGlen) * [Jack Pronske](https://github.com/jackpronske/) * [Zachary Shold](https://github.com/Prollux/) * [Lerroy Mwaghore](https://github.com/lmwaghore) * [Austin Killough](https://github.com/austinbkillo) * [Ross Russell](https://github.com/wolfshirts)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carribbean/blue-ocean.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carribbean/blue-ocean/issues"
+  },
+  "homepage": "https://github.com/Carribbean/blue-ocean#readme"
+}
