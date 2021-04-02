@@ -1,7 +1,19 @@
 import React from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
 
-const App = (props) => {
-  return <h1>Good news everyone!</h1>;
-};
+const localizer = momentLocalizer(moment);
+
+const App = (props) => (
+  <div>
+    <Calendar
+      localizer={localizer}
+      events={[]}
+      startAccessor="start"
+      endAccessor="end"
+      style={{ height: 500 }}
+    />
+  </div>
+);
 
 export default App;
