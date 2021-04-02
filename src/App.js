@@ -12,6 +12,7 @@ const App = (props) => (
       startAccessor="start"
       endAccessor="end"
       style={{ height: 500 }}
+      view={"week"}
     />
   </div>
 );
