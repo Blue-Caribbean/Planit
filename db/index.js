@@ -10,3 +10,6 @@ const pool = new Pool({
 });
 
 // to query just use pool.query(thing)
+module.exports = {
+  pool,
+};
