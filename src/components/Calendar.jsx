@@ -1,11 +1,11 @@
-import React from "react";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+import React from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
 
 const localizer = momentLocalizer(moment);
 
-const App = (props) => (
-  <div>
+
+const CalendarComponent = (props) => (
     <Calendar
       localizer={localizer}
       events={[]}
@@ -14,7 +14,7 @@ const App = (props) => (
       style={{ height: 500 }}
       view="week"
     />
-  </div>
-);
+  );
 
-export default App;
+
+export default CalendarComponent;
