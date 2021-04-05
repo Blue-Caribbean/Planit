@@ -7,5 +7,5 @@ app.use(express.static("public"));
 app.use(express.json());
 
 app.listen(port, () => {
-  console.log("express is on port " + port);
+  console.log(`express is on port ${  port}`);
 });

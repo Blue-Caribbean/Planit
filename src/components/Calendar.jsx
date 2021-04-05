@@ -5,16 +5,21 @@ import moment from 'moment';
 const localizer = momentLocalizer(moment);
 
 
-const CalendarComponent = (props) => (
+const CalendarComponent = (props) => {
+  const { events } = props;
+  return (
+  <>
+  <h1>Planit</h1>
     <Calendar
       localizer={localizer}
-      events={[]}
+      events={events}
       startAccessor="start"
       endAccessor="end"
       style={{ height: 500 }}
-      view="week"
     />
+    </>
   );
+}
 
 
 export default CalendarComponent;
