@@ -10,6 +10,8 @@ const CalendarComponent = (props) => {
   return (
   <>
   <h1>Planit</h1>
+  <h4>Show My Calendar</h4>
+  <h4>Edit Availablity</h4>
     <Calendar
       localizer={localizer}
       events={events}
