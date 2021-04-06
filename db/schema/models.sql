@@ -68,8 +68,8 @@ DROP TABLE IF EXISTS "freetime";
 CREATE TABLE "freetime" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NULL DEFAULT NULL,
-  "start" DATE NULL DEFAULT NULL,
-  "end" DATE NULL DEFAULT NULL,
+  "start" TIMESTAMP NULL DEFAULT NULL,
+  "end_time" TIMESTAMP NULL DEFAULT NULL,
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
@@ -83,8 +83,8 @@ DROP TABLE IF EXISTS "event";
 CREATE TABLE "event" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(250) NULL DEFAULT NULL,
-  "startTime" DATE NULL DEFAULT NULL,
-  "endTime" DATE NULL DEFAULT NULL,
+  "start_time" TIMESTAMP NULL DEFAULT NULL,
+  "end_time" TIMESTAMP NULL DEFAULT NULL,
   "group_id" INTEGER NULL DEFAULT NULL,
   FOREIGN KEY(group_id) REFERENCES groups(id)
 );
@@ -94,13 +94,13 @@ CREATE TABLE "event" (
 -- --
 -- -- ---
 
-DROP TABLE IF EXISTS "usersToEvents";
+DROP TABLE IF EXISTS "users_to_events";
 
-CREATE TABLE "usersToEvents" (
+CREATE TABLE "users_to_events" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NULL DEFAULT NULL,
   "event_id" INTEGER NULL DEFAULT NULL,
-  "pending" INTEGER NULL DEFAULT NULL,
+  "pending" INTEGER NULL DEFAULT 1,
   "accepted" INTEGER NULL DEFAULT NULL,
   FOREIGN KEY(event_id) REFERENCES event(id),
   FOREIGN KEY(user_id) REFERENCES users(id)

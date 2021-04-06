@@ -22,8 +22,14 @@ INSERT INTO groups (group_name, private) VALUES('Night bicycling', 1);
 INSERT INTO user_to_group (user_id, group_id) VALUES (2, 1);
 INSERT INTO user_to_group (user_id, group_id) VALUES (2, 2);
 
--- FIXME: Eventually need to create some free time objects. I'll grab these from moment when I start up the app.
+-- Free time for user
+INSERT INTO freetime (user_id, start, end_time) VALUES(1,'2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z');
+INSERT INTO freetime (user_id, start, end_time) VALUES(2, '2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z');
 
--- Same
+-- create event
+INSERT INTO event (name, start_time, end_time, group_id) VALUES('riding a bicycle', '2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z', 1);
+
+-- users_to_events
+INSERT INTO users_to_events (user_id, event_id) VALUES (2, 1);
 
 
