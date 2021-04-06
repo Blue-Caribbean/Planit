@@ -1,6 +1,6 @@
 import React from 'react';
-import SidebarList from './SidebarList.jsx';
-
+import SidebarList from './SidebarList';
+import PlusButton from './PlusButton';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -59,8 +59,11 @@ class Sidebar extends React.Component {
         >
           Friends
         </button>
-        <input type="text" value={searchTerm} onChange={this.handleChange} />
-        <button type="button">+</button>
+        <PlusButton
+          friends={dummy.friends}
+          groups={dummy.groups}
+          isGroupsSelected={groupsSelected}
+        />
         <SidebarList
           friends={dummy.friends}
           groups={dummy.groups}

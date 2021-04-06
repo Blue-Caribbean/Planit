@@ -6,6 +6,7 @@ class SidebarList extends React.Component {
 
     this.state = {
       clicked: '',
+      clickedIndex: -1,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -14,6 +15,7 @@ class SidebarList extends React.Component {
     console.log(event);
     this.setState({
       clicked: event.target.innerHTML,
+      clickedIndex: event.target.key,
     });
   }
 

@@ -11,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
+      <div id="app">
         <CalendarComponent
           events={[
             {
