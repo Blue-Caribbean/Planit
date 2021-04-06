@@ -1,6 +1,7 @@
 import React from 'react';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar.jsx';
+import EventsUpcoming from './carousel/EventsUpcoming.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +11,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <CalendarComponent />
         <Sidebar />
+        <EventsUpcoming />
       </div>
     );
   }
