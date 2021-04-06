@@ -11,8 +11,9 @@ class SidebarList extends React.Component {
   }
 
   handleClick(event) {
+    console.log(event);
     this.setState({
-      clicked: event.target.value,
+      clicked: event.target.innerHTML,
     });
   }
 
@@ -32,15 +33,20 @@ class SidebarList extends React.Component {
         </div>
       );
     }
+    /*
+      Add this button into the render method below if
+      we want to schedule events directly from the sidebar
+
+      In my opinion it would be much easier to just have a single
+      button to schedule the event and have the group details change.
+    */
     return (
       <div className="sidebarList">
-        <ul>
-          {groups.map((group, index) => (
-            <li key={index} onClick={this.handleClick}>
-              {group}
-            </li>
-          ))}
-        </ul>
+        {groups.map((group, index) => (
+          <div key={index} onClick={this.handleClick} name={group}>
+            {group}
+          </div>
+        ))}
       </div>
     );
   }

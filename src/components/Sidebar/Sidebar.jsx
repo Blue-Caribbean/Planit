@@ -11,6 +11,7 @@ class Sidebar extends React.Component {
         groups: ['Galactus Maximus', 'Fathers who Fart', 'Fidget Spinners Anonomous', 'Wall-Mart'],
       },
       groupsSelected: true,
+      searchTerm: '',
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
@@ -20,16 +21,24 @@ class Sidebar extends React.Component {
     if (groupsSelected === true) {
       this.setState({
         groupsSelected: false,
+        searchTerm: '',
       });
     } else {
       this.setState({
         groupsSelected: true,
+        searchTerm: '',
       });
     }
   }
 
+  handleChange(event) {
+    this.setState({
+      searchTerm: event.target.value,
+    });
+  }
+
   render() {
-    const { dummy, groupsSelected } = this.state;
+    const { dummy, groupsSelected, searchTerm } = this.state;
     let friendsColor = 'red';
     let groupsColor = 'white';
     if (groupsSelected === true) {
@@ -38,12 +47,19 @@ class Sidebar extends React.Component {
     }
     return (
       <div id="sidebarContainer">
-        <button type="button" onClick={this.handleToggle} color={groupsColor}>
+        <button type="button" onClick={this.handleToggle} style={{ backgroundColor: groupsColor }}>
           Groups
         </button>
-        <button type="button" id="friendsButton" onClick={this.handleToggle} color={friendsColor}>
+        <button
+          type="button"
+          id="friendsButton"
+          onClick={this.handleToggle}
+          color={friendsColor}
+          style={{ backgroundColor: friendsColor }}
+        >
           Friends
         </button>
+        <input type="text" value={searchTerm} onChange={this.handleChange} />
         <button type="button">+</button>
         <SidebarList
           friends={dummy.friends}
