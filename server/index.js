@@ -71,5 +71,5 @@ app.post('/api/:groupid/event', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('express is on port ' + port);
+  console.log(`express is on port ${port}`);
 });
