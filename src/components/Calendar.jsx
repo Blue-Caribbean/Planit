@@ -6,7 +6,7 @@ const localizer = momentLocalizer(moment);
 
 
 const CalendarComponent = (props) => {
-  const { events, editAvailablity } = props;
+  const { events, editAvailablity, canEdit } = props;
 
   // onClick event that clears current events array from state then makes calendar selectable
     // allows user to slect free times
@@ -17,9 +17,9 @@ const CalendarComponent = (props) => {
   <>
   <h1>Planit</h1>
   <h4>Show My Calendar</h4>
-  <h4 onC>Edit Availablity</h4>
+  <h4 onClick>Edit Availablity</h4>
     <Calendar
-      selectable={true}
+      selectable={canEdit}
       localizer={localizer}
       events={events}
       startAccessor="start"

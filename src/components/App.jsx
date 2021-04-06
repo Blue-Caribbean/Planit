@@ -20,6 +20,7 @@ class App extends React.Component {
           end: new Date(2021, 3, 3),
         },
       ],
+      canEdit: false
     };
     this.editAvailablity = this.editAvailablity.bind(this);
   }
@@ -36,12 +37,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { eventsShowing } = this.state;
+    const { eventsShowing, canEdit } = this.state;
     return (
       <div className="app">
         <CalendarComponent
           events={eventsShowing}
           editAvailablity={this.editAvailablity}
+          canEdit={canEdit}
         />
         <EventsUpcoming />
       </div>
