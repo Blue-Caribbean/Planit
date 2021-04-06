@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarComponent from './Calendar';
+import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
 
 class App extends React.Component {
@@ -38,11 +39,12 @@ class App extends React.Component {
   render() {
     const { eventsShowing } = this.state;
     return (
-      <div className="app">
+      <div id="app">
         <CalendarComponent
           events={eventsShowing}
           editAvailablity={this.editAvailablity}
         />
+        <Sidebar />
         <EventsUpcoming />
       </div>
     );
