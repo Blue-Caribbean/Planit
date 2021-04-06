@@ -25,9 +25,9 @@ DROP TABLE IF EXISTS "friends";
 
 CREATE TABLE "friends" (
   "id" SERIAL PRIMARY KEY,
-  "userid" INTEGER NULL DEFAULT NULL,
+  "user_id" INTEGER NULL DEFAULT NULL,
   "friend_id" INTEGER NULL DEFAULT NULL,
-  FOREIGN KEY(userid) REFERENCES users(id),
+  FOREIGN KEY(user_id) REFERENCES users(id),
   FOREIGN KEY(friend_id) REFERENCES users(id)
 );
 
@@ -49,11 +49,11 @@ CREATE TABLE "groups" (
 -- --
 -- -- ---
 
-DROP TABLE IF EXISTS "userToGroup";
+DROP TABLE IF EXISTS "user_to_group";
 
-CREATE TABLE "userToGroup" (
+CREATE TABLE "user_to_group" (
   "id" SERIAL PRIMARY KEY,
-  "userId" INTEGER NULL DEFAULT NULL,
+  "user_id" INTEGER NULL DEFAULT NULL,
   "group_id" INTEGER NULL DEFAULT NULL,
   FOREIGN KEY(group_id) REFERENCES groups(id)
 );
@@ -63,9 +63,9 @@ CREATE TABLE "userToGroup" (
 -- --
 -- -- ---
 
-DROP TABLE IF EXISTS "Freetime";
+DROP TABLE IF EXISTS "freetime";
 
-CREATE TABLE "Freetime" (
+CREATE TABLE "freetime" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NULL DEFAULT NULL,
   "start" DATE NULL DEFAULT NULL,
