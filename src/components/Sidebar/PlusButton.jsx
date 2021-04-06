@@ -41,7 +41,7 @@ class PlusButton extends React.Component {
 
     if (isGroupsSelected === false) {
       return (
-        <div>
+        <div id="modalDiv">
           <button onClick={this.openModal}>+</button>
           <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
             <h2>Search for friends</h2>
@@ -69,7 +69,7 @@ class PlusButton extends React.Component {
       button to schedule the event and have the group details change.
     */
     return (
-      <div>
+      <div id="modalDiv">
         <button onClick={this.openModal}>+</button>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
           <h2>Search for friends</h2>

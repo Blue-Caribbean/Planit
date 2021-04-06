@@ -29,7 +29,7 @@ class App extends React.Component {
     const { eventsShowing } = this.state;
     const tempArr = eventsShowing.slice();
 
-    tempArr.push({start, end, title: 'Freetime' });
+    tempArr.push({ start, end, title: 'Freetime' });
 
     this.setState({
       eventsShowing: tempArr,
@@ -40,10 +40,7 @@ class App extends React.Component {
     const { eventsShowing } = this.state;
     return (
       <div id="app">
-        <CalendarComponent
-          events={eventsShowing}
-          editAvailablity={this.editAvailablity}
-        />
+        <CalendarComponent events={eventsShowing} editAvailablity={this.editAvailablity} />
         <Sidebar />
         <EventsUpcoming />
       </div>
