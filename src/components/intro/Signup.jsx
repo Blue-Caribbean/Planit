@@ -6,6 +6,7 @@ class Signup extends React.Component {
     this.state = {
     };
     this.handleChange = this.handleChange.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   handleChange(event) {
@@ -13,6 +14,11 @@ class Signup extends React.Component {
     const key = event.target.id;
     const val = event.target.value;
     this.setState({ [key]: val});
+  }
+
+  goBack() {
+    const { app } = this.props;
+    app.setState({ signup: false });
   }
 
   render() {
@@ -24,7 +30,8 @@ class Signup extends React.Component {
           <input id='first' type='text' placeholder='First Name' onChange ={this.handleChange} />
           <input id='last' type='text' placeholder="Last Name" onChange ={this.handleChange} />
           <input id='password' type='password' onChange={this.handleChange} placeholder='Enter Password' />
-          <button type="submit">Sign Up</button>
+          <button type='submit'>Sign Up</button>
+          <button type='button' onClick={this.goBack}>Go Back</button>
         </form>
       </label>
     );
