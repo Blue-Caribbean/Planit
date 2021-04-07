@@ -6,6 +6,7 @@ class Login extends React.Component {
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.signup = this.signup.bind(this);
   }
 
   handleChange(event) {
@@ -14,6 +15,7 @@ class Login extends React.Component {
     this.setState({ [key]: val });
   }
 
+
   handleSubmit(event) {
     event.preventDefault();
     const { app } = this.props;
@@ -21,14 +23,20 @@ class Login extends React.Component {
     //GET request  /api/auth paramObj = {email: emailAddress}
   }
 
+  signup() {
+    const { app } = this.props;
+    app.setState({signup: true});
+  }
+
   render() {
     return (
       <label>
-        Login
+        Create an Account
         <form onSubmit={this.handleSubmit}>
-          <input id="email" type="email" pattern="[^@\s]+@[^@\s]+" title="Invalid email address" />
-          <input id="password" type="password" />
-          <button type="submit">Login</button>
+          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com"/>
+          <input id='password' type='password' placeholder='password' />
+          <button type='submit'>Login</button>
+          <button type='button' onClick={this.signup}>Signup</button>
         </form>
       </label>
     );
