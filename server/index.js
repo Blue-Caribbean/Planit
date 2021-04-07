@@ -16,18 +16,16 @@ app.post('/api/auth', (req, res) => {
 app.post('/api/createuser', (req, res) => {
   // New user object.
   /*
-  {
-    user: {
-      first,
-      last,
-      email,
-      profilepic
-    },
-    freetime: {
-      [freetime objects]
-    }
-  }
-   */
+  const fakeUserObject = {
+  first: 'Bill',
+  last: 'Jones',
+  email: 'some@something.com',
+  profilepic:
+    'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png',
+  freetime: [{freetimeobjects}]
+};
+  respond with newly created user id.
+*/
 });
 
 app.put('/api/:userid/updatefreetime', (req, res) => {
