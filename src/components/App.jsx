@@ -21,32 +21,16 @@ class App extends React.Component {
           end: new Date(2021, 3, 3),
         },
       ],
-      canEdit: false
     };
-    this.editAvailablity = this.editAvailablity.bind(this);
-    this.updateAvailability = this.updateAvailability.bind(this);
-  }
-
-  updateAvailability() {
-    this.setState({ eventsShowing: [], canEdit: true })
-  }
-
-  editAvailablity({ start, end }) {
-    const { eventsShowing } = this.state;
-    const tempArr = eventsShowing.slice();
-
-    tempArr.push({start, end, title: 'Freetime' });
-
-    this.setState({
-      eventsShowing: tempArr,
-    });
   }
 
   render() {
+    const app = this;
     const { eventsShowing, canEdit } = this.state;
     return (
       <div id="app">
         <CalendarComponent
+          app={app}
           events={eventsShowing}
           editAvailablity={this.editAvailablity}
           canEdit={canEdit}
