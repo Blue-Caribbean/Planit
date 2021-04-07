@@ -1,5 +1,6 @@
 import React from 'react';
-import Login from './Login';
+import Login from './intro/Login';
+import Signup from './intro/Signup';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
@@ -8,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userEmail: '',
+      signup: false,
       eventsShowing: [
         {
           id: 0,
@@ -39,9 +40,13 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { eventsShowing, loggedIn } = this.state;
+    const { eventsShowing, loggedIn, signup } = this.state;
     if (!loggedIn) {
-      return <Login app={app} />;
+      return (
+        <div id='app'>
+          {signup ? <Signup app={app} /> : <Login app={app} /> }
+        </div>
+      )
     }
     return (
       <div id="app">
