@@ -9,19 +9,34 @@ class CalendarComponent extends React.Component {
     super();
     this.state = {
       canEdit: false,
+      prevEvents: [],
     };
     this.updateAvailability = this.updateAvailability.bind(this);
     this.editAvailability = this.editAvailability.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+  }
+
+  onCancel() {
+    const { app } = this.props;
+    const { prevEvents } = this.state;
+    this.setState(
+      { canEdit: false },
+      app.setState({
+        eventsShowing: prevEvents,
+      })
+    );
   }
 
   updateAvailability() {
     const { app } = this.props;
-    const self = this;
-    app.setState({ eventsShowing: [] }, () => {
-      self.setState({
+    const { eventsShowing } = app.state;
+    this.setState(
+      {
+        prevEvents: eventsShowing,
         canEdit: true,
-      });
-    });
+      },
+      app.setState({ eventsShowing: [] })
+    );
   }
 
   editAvailability({ start, end }) {
@@ -33,10 +48,6 @@ class CalendarComponent extends React.Component {
       eventsShowing: tempArr,
     });
   }
-  // onClick event that clears current events array from state then makes calendar selectable
-  // allows user to slect free times
-  // saves free times to state
-  // on submit makes call to update freetimes
 
   render() {
     const { events } = this.props;
@@ -48,7 +59,9 @@ class CalendarComponent extends React.Component {
         <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
         {canEdit ? (
           <>
-            <button type="submit">Cancel</button>
+            <button type="submit" onClick={this.onCancel}>
+              Cancel
+            </button>
             <button type="submit">Submit</button>
           </>
         ) : null}
