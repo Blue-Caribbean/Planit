@@ -26,15 +26,12 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { eventsShowing, canEdit } = this.state;
+    const { eventsShowing } = this.state;
     return (
       <div id="app">
         <CalendarComponent
           app={app}
           events={eventsShowing}
-          editAvailablity={this.editAvailablity}
-          canEdit={canEdit}
-          updateAvailability={this.updateAvailability}
         />
         <Sidebar />
         <EventsUpcoming />
