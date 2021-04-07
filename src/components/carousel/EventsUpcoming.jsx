@@ -136,7 +136,7 @@ class EventsUpcoming extends React.Component {
     // console.log('EventsUpcoming_render eventsDataCollection:', eventsDataCollection);
     // _state dummyEventsDataCollection
     const { dummyEventsDataCollection } = this.state;
-    console.log('EventsUpcoming_render dummyEventsDataCollection:', dummyEventsDataCollection);
+    // console.log('EventsUpcoming_render dummyEventsDataCollection:', dummyEventsDataCollection);
 
     // <<<<<< userEventTilesAwaitingRsvp
     // | date.day#  |  event.title       |
