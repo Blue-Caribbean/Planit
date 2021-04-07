@@ -1,4 +1,5 @@
 const pg = require('./index.js');
+const moment = require('moment');
 const fakeData = require('./fakedata.js');
 
 const checkUser = ({ email }, cb) => {
@@ -24,7 +25,7 @@ const checkUser = ({ email }, cb) => {
 const createUser = (userObj, cb) => {
   const { first, last, email, profilepic } = userObj;
   let userId;
-  //FIXME: NO FREE TIME
+  // FIXME: NO FREE TIME coming back.
   pg.pool.query(
     'INSERT INTO users(first, last, email, profilepic) VALUES ($1, $2, $3, $4) RETURNING id;',
     [first, last, email, profilepic],
@@ -99,14 +100,28 @@ const getAllGroups = ({ group_name }, cb) => {
   );
 };
 
-const getGroups = (userId, cb) => {
+const getGroupsById = (userId, cb) => {
   // Get all users groups from user_to_group based on user id,
   // join the group_id on groups_name
-  let sql = 'SELECT * FROM user_to_group, groups WHERE group_id = groups.id AND user_id = ($1)';
+  const sql = 'SELECT * FROM user_to_group, groups WHERE group_id = groups.id AND user_id = ($1)';
   pg.pool.query(sql, [userId], (err, results) => {
     if (err) {
       cb(err, null);
     } else {
+      cb(null, results);
+    }
+  });
+};
+
+const createEventByGroupId = (groupId, eventObj, cb) => {
+  const { name, start_time, end_time } = eventObj;
+  //name, starttime, endtime, groupid
+  let sql = 'INSERT INTO event (name, start_time, end_time, group_id) VALUES ($1, $2, $3, $4)';
+  pg.pool.query(sql, [name, start_time, end_time, groupId], (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      //now i pull the userids from the group id
       cb(null, results);
     }
   });
@@ -125,6 +140,35 @@ const searchFriends = ({ email }, cb) => {
   });
 };
 
+const addFriend = (userID, friendID, cb) => {
+  const sql = `INSERT INTO friends (user_id, friend_id) VALUES (${userID}, ${friendID}), (${friendID}, ${userID});`;
+  pg.pool.query(sql, (err, data) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+const deleteFriend = (userID, friendID, cb) => {
+  const sql = `DELETE FROM friends WHERE (user_id = ${userID} AND friend_id = ${friendID})`;
+  const sqlTwo = `DELETE FROM friends WHERE (user_id = ${friendID} AND friend_id = ${userID})`;
+  pg.pool.query(sql, (err, data) => {
+    if (err) {
+      cb(err);
+    } else {
+      pg.pool.query(sqlTwo, (errTwo, dataTwo) => {
+        if (errTwo) {
+          cb(errTwo);
+        } else {
+          cb(null, dataTwo);
+        }
+      });
+    }
+  });
+};
+
 const getFriends = (userID, cb) => {
   const sql = `SELECT first, last FROM users INNER JOIN (SELECT friend_id FROM users INNER JOIN friends ON users.id = friends.user_id WHERE users.id = ${userID}) AS con ON users.id = con.friend_id;`;
   pg.pool.query(sql, (err, data) => {
@@ -136,6 +180,20 @@ const getFriends = (userID, cb) => {
   });
 };
 
+const getUserEvents = (userId, cb) => {
+  // We need to get all events by user id.
+  // Search users_to_events,
+  const query =
+    'select users_to_events.id as ute_id, users_to_events.user_id as ute_uid, users_to_events.event_id as ute_event_id, users_to_events.pending, users_to_events.accepted, event.name as event_name, event.start_time, event.end_time, event.group_id as egroup, groups.group_name from users_to_events join event on event.id=users_to_events.id join groups on event.group_id=groups.id where users_to_events.user_id=$1';
+  pg.pool.query(query, [userId], (err, result) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, result.rows);
+    }
+  });
+};
+
 module.exports = {
   createUser,
   updateFreeTime,
@@ -143,6 +201,10 @@ module.exports = {
   searchFriends,
   checkUser,
   getFriends,
+  addFriend,
   getAllGroups,
-  getGroups,
+  getGroupsById,
+  createEventByGroupId,
+  getUserEvents,
+  deleteFriend,
 };

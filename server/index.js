@@ -67,6 +67,13 @@ app.put('/api/:userid/updatefreetime', (req, res) => {
 app.post('/api/:userid/addfriend', (req, res) => {
   // takes user id of friend, and user id param and adds friend.
   // double post to db.
+  queries.addFriend(req.params.userid, req.body.friend_id, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(204).send(data);
+    }
+  });
 });
 
 app.delete('/api/:userid/deletefriend', (req, res) => {
@@ -82,7 +89,7 @@ app.post('/api/searchfriends', (req, res) => {
 app.get('/api/:userid/groups', (req, res) => {
   //austin
   // get all groups for this user id and return them.
-  queries.getGroups(req.params.userid, (err, results) => {
+  queries.getGroupsById(req.params.userid, (err, results) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -124,15 +131,27 @@ app.get('/api/:userid/friends', (req, res) => {
 });
 
 app.get('/api/:userid/userevents', (req, res) => {
-  // gets user events. this is a huge query very heavy.
-  //
+  // actually not so bad.
+  queries.getUserEvents(req.params.id, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
 });
 
 app.post('/api/:groupid/event', (req, res) => {
   //Austin
-  //creating new event in a group
-  // takes groupid, adds an event object to events table.
-  //needs to add entry to the en
+  //insert the event -> pull the user ids from the group id -> each user Id insert new users to events
+
+  queries.createEventByGroupId(req.params.groupid, req.body, (err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
 app.listen(port, () => {
