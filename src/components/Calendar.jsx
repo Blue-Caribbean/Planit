@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 
 const localizer = momentLocalizer(moment);
@@ -55,10 +55,11 @@ class CalendarComponent extends React.Component {
         <Calendar
           selectable={canEdit}
           localizer={localizer}
+          defaultView={Views.WEEK}
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{ height: '430px', width: '70%' }}
           onSelectEvent={(event) => alert(event.title)}
           onSelectSlot={this.editAvailability}
         />

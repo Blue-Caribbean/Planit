@@ -14,14 +14,32 @@ class App extends React.Component {
           start: new Date(2021, 3, 0, 3, 20, 0),
           end: new Date(2021, 3, 0, 3, 45, 0),
         },
-        {
-          id: 1,
-          title: 'Free Time',
-          start: new Date(2021, 3, 0),
-          end: new Date(2021, 3, 3),
-        },
       ],
     };
+  }
+
+  componentDidMount() {
+    this.userLoginInfo();
+  }
+
+  getUserInfo(userEmail) {
+    // make get request with username
+
+    this.setState({
+      eventsShowing: [
+        {
+          id: 0,
+          title: 'Example Event (Example Group)',
+          start: new Date(2021, 3, 0, 3, 20, 0),
+          end: new Date(2021, 3, 0, 3, 45, 0),
+        },
+      ],
+    });
+  }
+
+  userLoginInfo() {
+    const userEmail = window.prompt('Login Email: ');
+    this.getUserInfo(userEmail);
   }
 
   render() {
@@ -29,10 +47,7 @@ class App extends React.Component {
     const { eventsShowing } = this.state;
     return (
       <div id="app">
-        <CalendarComponent
-          app={app}
-          events={eventsShowing}
-        />
+        <CalendarComponent app={app} events={eventsShowing} />
         <Sidebar />
         <EventsUpcoming />
       </div>
