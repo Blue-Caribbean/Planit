@@ -2,6 +2,6 @@ module.exports = {
   pgUser: 'postgres',
   pgPass: 'password',
   host: 'localhost',
-  database: 'planit',
+  database: 'planit', //
   port: 5432,
 };
