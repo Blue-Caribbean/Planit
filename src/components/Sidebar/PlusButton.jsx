@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
+//mport ReactDOM from 'react-dom';
 
-Modal.setAppElement('#app');
+Modal.setAppElement(document.getElementById('app'));
 
 class PlusButton extends React.Component {
   constructor(props) {
@@ -90,3 +91,14 @@ class PlusButton extends React.Component {
 }
 
 export default PlusButton;
+/*
+  No idea why but the most recent PR broke this modal. I can't figure out how to fix it so I'm going to
+  move on.
+
+  When I first added modal.setAppElement it moved the modal to the very front of the screen.
+
+  Now even when I try to set the z-index nothing happens.
+
+  I don't really understand how there could be any changes with the calendar that are affecting my
+  modal so it's probobly something on my end.
+*/
