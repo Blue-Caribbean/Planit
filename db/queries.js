@@ -1,5 +1,6 @@
 const pg = require('./index.js');
 const fakeData = require('./fakedata.js');
+
 const createUser = (userObj, cb) => {
   const { first, last, email, profilepic } = userObj;
   let userId;
