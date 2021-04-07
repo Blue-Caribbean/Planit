@@ -28,7 +28,7 @@ class CalendarComponent extends React.Component {
     const { app } = this.props;
     const { eventsShowing } = app.state;
     const tempArr = eventsShowing.slice();
-    tempArr.push({ start, end, title: 'Free Time', display: 'background' });
+    tempArr.push({ start, end, title: 'Free Time' });
     app.setState({
       eventsShowing: tempArr,
     });
