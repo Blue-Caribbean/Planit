@@ -122,7 +122,7 @@ const createEventByGroupId = (groupId, eventObj, cb) => {
       cb(err, null);
     } else {
       //now i pull the userids from the group id
-      cb(null, results);
+      //cb(null, results);
     }
   });
 };
