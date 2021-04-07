@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
@@ -7,6 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userEmail: '',
       eventsShowing: [
         {
           id: 0,
@@ -15,16 +17,14 @@ class App extends React.Component {
           end: new Date(2021, 3, 0, 3, 45, 0),
         },
       ],
+      loggedIn: false,
     };
+    this.getUserInfo = this.getUserInfo.bind(this);
   }
 
-  componentDidMount() {
-    this.userLoginInfo();
-  }
-
-  getUserInfo(userEmail) {
-    // make get request with username
-
+  getUserInfo() {
+    // make get request with username in state
+    // sets state with the events returned
     this.setState({
       eventsShowing: [
         {
@@ -37,17 +37,15 @@ class App extends React.Component {
     });
   }
 
-  userLoginInfo() {
-    const userEmail = window.prompt('Login Email: ');
-    this.getUserInfo(userEmail);
-  }
-
   render() {
     const app = this;
-    const { eventsShowing } = this.state;
+    const { eventsShowing, loggedIn } = this.state;
+    if (!loggedIn) {
+      return <Login app={app} />;
+    }
     return (
       <div id="app">
-        <CalendarComponent app={app} events={eventsShowing} />
+        <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} />
         <Sidebar />
         <EventsUpcoming />
       </div>
