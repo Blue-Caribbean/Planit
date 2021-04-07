@@ -22,7 +22,7 @@ class App extends React.Component {
     this.userLoginInfo();
   }
 
-  getUserInfo(userName) {
+  getUserInfo(userEmail) {
     // make get request with username
 
     this.setState({
@@ -38,8 +38,8 @@ class App extends React.Component {
   }
 
   userLoginInfo() {
-    const userName = window.prompt('Username: ');
-    this.getUserInfo(userName);
+    const userEmail = window.prompt('Login Email: ');
+    this.getUserInfo(userEmail);
   }
 
   render() {
