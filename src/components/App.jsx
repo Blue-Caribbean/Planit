@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login.jsx';
+import Login from './Login';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
