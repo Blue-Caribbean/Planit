@@ -11,11 +11,13 @@ class PlusButton extends React.Component {
     this.state = {
       modalIsOpen: false,
       searchBarTerm: '',
+      newGroupName: '',
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleGroupChange = this.handleGroupChange.bind(this);
   }
 
   openModal() {
@@ -30,11 +32,25 @@ class PlusButton extends React.Component {
     });
   }
 
+  handleGroupChange(event) {
+    this.setState({
+      newGroupName: event.target.value,
+    });
+  }
+
   handleChange(event) {
     this.setState({
       searchBarTerm: event.target.value,
     });
   }
+
+  // createGroup(event) {
+
+  // }
+
+  // addGroup() {
+
+  // }
 
   render(props) {
     const { modalIsOpen } = this.state;
@@ -74,7 +90,7 @@ class PlusButton extends React.Component {
         <button onClick={this.openModal}>+</button>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
           <h2>Search for friends</h2>
-          <input type="text" />
+          <input type="text" placeholder="Search Groups" />
           <div className="sidebarList">
             {groups.map((group, index) => (
               <div key={index} onClick={this.handleClick} name={group}>
@@ -82,7 +98,12 @@ class PlusButton extends React.Component {
               </div>
             ))}
           </div>
-          <button>Add Friend</button>
+          <button>Add Group</button>
+          <h2>Create Group</h2>
+          <div className="createGroup">
+            <input type="text" placeholder="Group Name" />
+            <button>Create</button>
+          </div>
           <button onClick={this.closeModal}>Close</button>
         </Modal>
       </div>

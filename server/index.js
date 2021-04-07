@@ -1,4 +1,5 @@
 const express = require('express');
+const queries = require('../db/queries.js');
 
 const app = express();
 const port = 3000;
@@ -15,18 +16,23 @@ app.post('/api/auth', (req, res) => {
 app.post('/api/createuser', (req, res) => {
   // New user object.
   /*
-  {
-    user: {
-      first,
-      last,
-      email,
-      profilepic
-    },
-    freetime: {
-      [freetime objects]
+  const fakeUserObject = {
+  first: 'Bill',
+  last: 'Jones',
+  email: 'some@something.com',
+  profilepic:
+    'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png',
+  freetime: [{freetimeobjects}]
+};
+  respond with newly created user id.
+*/
+  queries.createUser(req.body, (err, result) => {
+    if (err) {
+      res.status(400).send(result);
+    } else {
+      res.status(200).send(result);
     }
-  }
-   */
+  });
 });
 
 app.put('/api/:userid/updatefreetime', (req, res) => {
