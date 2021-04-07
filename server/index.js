@@ -1,5 +1,5 @@
 const express = require('express');
-const moment = require('moment');
+const queries = require('../db/queries.js');
 
 const app = express();
 const port = 3000;
@@ -26,6 +26,13 @@ app.post('/api/createuser', (req, res) => {
 };
   respond with newly created user id.
 */
+  queries.createUser(req.body, (err, result) => {
+    if (err) {
+      res.status(400).send(result);
+    } else {
+      res.status(200).send(result);
+    }
+  });
 });
 
 app.put('/api/:userid/updatefreetime', (req, res) => {

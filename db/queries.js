@@ -26,4 +26,6 @@ const createUser = (userObj, cb) => {
   );
 };
 
-module.exports = {};
+module.exports = {
+  createUser,
+};
