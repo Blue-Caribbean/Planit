@@ -1,6 +1,4 @@
 const pg = require('./index.js');
-const moment = require('moment');
-const fakeData = require('./fakedata.js');
 
 const checkUser = ({ email }, cb) => {
   pg.pool.query('SELECT * FROM users WHERE email=$1', [email], (err, result) => {
@@ -25,7 +23,7 @@ const checkUser = ({ email }, cb) => {
 const createUser = (userObj, cb) => {
   const { first, last, email, profilepic } = userObj;
   let userId;
-  // FIXME: NO FREE TIME coming back.
+
   pg.pool.query(
     'INSERT INTO users(first, last, email, profilepic) VALUES ($1, $2, $3, $4) RETURNING id;',
     [first, last, email, profilepic],
@@ -34,14 +32,6 @@ const createUser = (userObj, cb) => {
         cb(err, null);
       } else {
         userId = result.rows[0].id;
-        // This is an expensive operation! Firing asyncs but not waiting for errs, so look out!
-        userObj.freetime.forEach((obj) => {
-          pg.pool.query('INSERT INTO freetime (user_id, start, end_time) VALUES ($1, $2, $3)', [
-            userId,
-            obj.start,
-            obj.end_time,
-          ]);
-        });
         cb(null, userId);
       }
     }
@@ -115,13 +105,21 @@ const getGroupsById = (userId, cb) => {
 
 const createEventByGroupId = (groupId, eventObj, cb) => {
   const { name, start_time, end_time } = eventObj;
-  //name, starttime, endtime, groupid
   let sql = 'INSERT INTO event (name, start_time, end_time, group_id) VALUES ($1, $2, $3, $4)';
   pg.pool.query(sql, [name, start_time, end_time, groupId], (err, results) => {
     if (err) {
       cb(err, null);
     } else {
       //now i pull the userids from the group id
+      let sql2 = 'select user_id from user_to_group where group_id = $1';
+      pg.pool.query(sql2, [groupId], (error, results2) => {
+        if (error) {
+          cb(err, null);
+        } else {
+          debugger;
+        }
+      });
+      // select user_id from user_to_group where group_id = (groupId)
       //cb(null, results);
     }
   });

@@ -79,6 +79,13 @@ app.post('/api/:userid/addfriend', (req, res) => {
 app.delete('/api/:userid/deletefriend', (req, res) => {
   // gets user id, deletes friendship.
   // another double query.
+  queries.deleteFriend(req.params.userid, req.body.friend_id, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(202).send(data);
+    }
+  });
 });
 
 app.post('/api/searchfriends', (req, res) => {
