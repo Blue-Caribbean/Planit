@@ -12,6 +12,7 @@ class EventsUpcoming extends React.Component {
       rsvpResponse: null,
       eventsPanelOfNine: []
     };
+    // this.getEventInformationByUser = this.getEventInformationByUser.bind(this);
     // this.sortEventsUpcomingByDate = this.sortEventsUpcomingByDate.bind(this);
     // this.manageRsvpClickEvent = this.manageRsvpClickEvent.bind(this);
     // this.leftNavigationalArrowClick = this.leftNavigationalArrowClick.bind(this);
@@ -19,7 +20,17 @@ class EventsUpcoming extends React.Component {
   }
 
   // componentDidMount() {
+  //   getEventInformationByUser();
   // }
+
+  getEventInformationByUser() {
+  /*
+  app.get('/api/:userid/userevents', (req, res) => {
+    //gets user events. this is a huge query very heavy.
+  });
+  */
+
+  }
 
   // sortEventsUpcomingByDate() {
   // sorting
