@@ -125,10 +125,12 @@ app.get('/api/:userid/friends', (req, res) => {
 
 app.get('/api/:userid/userevents', (req, res) => {
   // gets user events. this is a huge query very heavy.
+  //
 });
 
 app.post('/api/:groupid/event', (req, res) => {
   //Austin
+  //creating new event in a group
   // takes groupid, adds an event object to events table.
   //needs to add entry to the en
 });
