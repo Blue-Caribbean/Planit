@@ -25,9 +25,9 @@ DROP TABLE IF EXISTS "friends";
 
 CREATE TABLE "friends" (
   "id" SERIAL PRIMARY KEY,
-  "userid" INTEGER NULL DEFAULT NULL,
+  "user_id" INTEGER NULL DEFAULT NULL,
   "friend_id" INTEGER NULL DEFAULT NULL,
-  FOREIGN KEY(userid) REFERENCES users(id),
+  FOREIGN KEY(user_id) REFERENCES users(id),
   FOREIGN KEY(friend_id) REFERENCES users(id)
 );
 
@@ -49,11 +49,11 @@ CREATE TABLE "groups" (
 -- --
 -- -- ---
 
-DROP TABLE IF EXISTS "userToGroup";
+DROP TABLE IF EXISTS "user_to_group";
 
-CREATE TABLE "userToGroup" (
+CREATE TABLE "user_to_group" (
   "id" SERIAL PRIMARY KEY,
-  "userId" INTEGER NULL DEFAULT NULL,
+  "user_id" INTEGER NULL DEFAULT NULL,
   "group_id" INTEGER NULL DEFAULT NULL,
   FOREIGN KEY(group_id) REFERENCES groups(id)
 );
@@ -63,13 +63,13 @@ CREATE TABLE "userToGroup" (
 -- --
 -- -- ---
 
-DROP TABLE IF EXISTS "Freetime";
+DROP TABLE IF EXISTS "freetime";
 
-CREATE TABLE "Freetime" (
+CREATE TABLE "freetime" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NULL DEFAULT NULL,
-  "start" DATE NULL DEFAULT NULL,
-  "end" DATE NULL DEFAULT NULL,
+  "start" TIMESTAMP NULL DEFAULT NULL,
+  "end_time" TIMESTAMP NULL DEFAULT NULL,
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
@@ -83,8 +83,8 @@ DROP TABLE IF EXISTS "event";
 CREATE TABLE "event" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(250) NULL DEFAULT NULL,
-  "startTime" DATE NULL DEFAULT NULL,
-  "endTime" DATE NULL DEFAULT NULL,
+  "start_time" TIMESTAMP NULL DEFAULT NULL,
+  "end_time" TIMESTAMP NULL DEFAULT NULL,
   "group_id" INTEGER NULL DEFAULT NULL,
   FOREIGN KEY(group_id) REFERENCES groups(id)
 );
@@ -94,13 +94,13 @@ CREATE TABLE "event" (
 -- --
 -- -- ---
 
-DROP TABLE IF EXISTS "usersToEvents";
+DROP TABLE IF EXISTS "users_to_events";
 
-CREATE TABLE "usersToEvents" (
+CREATE TABLE "users_to_events" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NULL DEFAULT NULL,
   "event_id" INTEGER NULL DEFAULT NULL,
-  "pending" INTEGER NULL DEFAULT NULL,
+  "pending" INTEGER NULL DEFAULT 1,
   "accepted" INTEGER NULL DEFAULT NULL,
   FOREIGN KEY(event_id) REFERENCES event(id),
   FOREIGN KEY(user_id) REFERENCES users(id)
