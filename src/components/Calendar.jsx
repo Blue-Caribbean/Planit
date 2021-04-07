@@ -19,6 +19,12 @@ const CalendarComponent = (props) => {
       <h4 onClick={ updateAvailability }>
         Edit Availablity
       </h4>
+      { canEdit ?
+<>
+<button type='submit'>Cancel</button>
+<button type='submit'>Submit</button>
+</> : null
+      }
       <Calendar
         selectable={canEdit}
         localizer={localizer}
