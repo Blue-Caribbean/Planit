@@ -46,10 +46,10 @@ class Signup extends React.Component {
       <label>
         Signup
         <form onSubmit={this.handleSubmit}>
-          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' onChange ={this.handleChange} placeholder='example@email.com' />
-          <input id='first' type='text' placeholder='First Name' onChange ={this.handleChange} />
-          <input id='last' type='text' placeholder="Last Name" onChange ={this.handleChange} />
-          <input id='password' type='password' onChange={this.handleChange} placeholder='Enter Password' />
+          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' onChange ={this.handleChange} placeholder='example@email.com' required />
+          <input id='first' type='text' placeholder='First Name' onChange ={this.handleChange} required />
+          <input id='last' type='text' placeholder="Last Name" onChange ={this.handleChange} required />
+          <input id='password' type='password' onChange={this.handleChange} placeholder='Enter Password' required />
           <button type='submit'>Sign Up</button>
           <button type='button' onClick={this.goBack}>Go Back</button>
         </form>
