@@ -3,8 +3,7 @@ const axios = require('axios');
 const login = (app, paramObj, callback) => {
   axios.post('/api/auth', paramObj)
     .then((data) => {
-      const { user } = data.data;
-      callback(null, user);
+      callback(null, data.data);
   })
     .catch(err => {
       callback(err)

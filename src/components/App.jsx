@@ -9,7 +9,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 4,
+      user: {
+        first: null,
+        last: null,
+        email: null,
+        userId: null,
+        profilepic: null
+      },
       signup: false,
       loggedIn: false,
       eventsShowing: [
@@ -41,7 +47,8 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { userId, eventsShowing, loggedIn, signup } = this.state;
+    const { user, eventsShowing, loggedIn, signup } = this.state;
+    const { userId } = user;
     if (!loggedIn) {
       return (
         <div id='app'>

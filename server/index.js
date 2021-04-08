@@ -18,6 +18,7 @@ app.post('/api/searchfriends', (req, res) => {
 });
 
 app.post('/api/auth', (req, res) => {
+  console.log(req.body);
   // Check for user in db, if no user create new user.
   // send back id if user exists.
   // if the user doesn't exist handle on the frontend.
