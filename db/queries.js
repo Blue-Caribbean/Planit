@@ -26,9 +26,7 @@ const getGroupBestFreeTime = (groupId, cb) => {
       // FIXME: This is a nieve solution, but it's super cpu heavy. Need to improve the algo.
       // Process all of the time objects, we don't care about explicit date, just days.
       // Start by sorting all the freetime objects by day.
-      const currentTime = moment();
-      const currentTimePlusHour = moment(currentTime).add(1, 'hour');
-      const currentTimePlusDay = moment(currentTime).add(1, 'day');
+
       // First we'll create an object that contains all of the available times sorted by day, using starting on
       // Store the largest amount of freetime slots key so that we don't have to iterate the object a second time.
 
@@ -50,22 +48,29 @@ const getGroupBestFreeTime = (groupId, cb) => {
 
       // Hone in on freetimes on the most available day.
       const ranges = [];
-
+      const overlap = {};
       if (largest > 1) {
         // Another pass on the data, this time we're looking for times that intersect.
         // First sort the array based on earliest start time.
         availableDays[largestKey].sort((a, b) => moment(a.start) - moment(b.start));
+        // Create our range objects
         availableDays[largestKey].forEach((timeObj) => {
           ranges.push(moment.range(timeObj.start, timeObj.end_time));
         });
+        // Iterate range objects and look for overlaps.
+        for (let i = 0; i < ranges.length; i++) {
+          for (let j = i + 1; j < ranges.length; j++) {
+            if (ranges[j].contains(ranges[i])) {
+              overlap[`${i}${j}`] = { start: ranges[j].start, end: ranges[j].end };
+            }
+          }
+        }
       } else {
         cb(null, availableDays);
       }
     }
   });
 };
-
-getGroupBestFreeTime(2, (err, res) => {});
 
 const checkUser = ({ email }, cb) => {
   pg.pool.query('SELECT * FROM users WHERE email=$1', [email], (err, result) => {
