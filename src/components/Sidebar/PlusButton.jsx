@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
+//mport ReactDOM from 'react-dom';
 
-Modal.setAppElement('#app');
+Modal.setAppElement(document.getElementById('app'));
 
 class PlusButton extends React.Component {
   constructor(props) {
@@ -10,11 +11,13 @@ class PlusButton extends React.Component {
     this.state = {
       modalIsOpen: false,
       searchBarTerm: '',
+      newGroupName: '',
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleGroupChange = this.handleGroupChange.bind(this);
   }
 
   openModal() {
@@ -29,11 +32,25 @@ class PlusButton extends React.Component {
     });
   }
 
+  handleGroupChange(event) {
+    this.setState({
+      newGroupName: event.target.value,
+    });
+  }
+
   handleChange(event) {
     this.setState({
       searchBarTerm: event.target.value,
     });
   }
+
+  // createGroup(event) {
+
+  // }
+
+  // addGroup() {
+
+  // }
 
   render(props) {
     const { modalIsOpen } = this.state;
@@ -41,7 +58,7 @@ class PlusButton extends React.Component {
 
     if (isGroupsSelected === false) {
       return (
-        <div>
+        <div id="modalDiv">
           <button onClick={this.openModal}>+</button>
           <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
             <h2>Search for friends</h2>
@@ -69,11 +86,11 @@ class PlusButton extends React.Component {
       button to schedule the event and have the group details change.
     */
     return (
-      <div>
+      <div id="modalDiv">
         <button onClick={this.openModal}>+</button>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
           <h2>Search for friends</h2>
-          <input type="text" />
+          <input type="text" placeholder="Search Groups" />
           <div className="sidebarList">
             {groups.map((group, index) => (
               <div key={index} onClick={this.handleClick} name={group}>
@@ -81,7 +98,12 @@ class PlusButton extends React.Component {
               </div>
             ))}
           </div>
-          <button>Add Friend</button>
+          <button>Add Group</button>
+          <h2>Create Group</h2>
+          <div className="createGroup">
+            <input type="text" placeholder="Group Name" />
+            <button>Create</button>
+          </div>
           <button onClick={this.closeModal}>Close</button>
         </Modal>
       </div>
@@ -90,3 +112,14 @@ class PlusButton extends React.Component {
 }
 
 export default PlusButton;
+/*
+  No idea why but the most recent PR broke this modal. I can't figure out how to fix it so I'm going to
+  move on.
+
+  When I first added modal.setAppElement it moved the modal to the very front of the screen.
+
+  Now even when I try to set the z-index nothing happens.
+
+  I don't really understand how there could be any changes with the calendar that are affecting my
+  modal so it's probobly something on my end.
+*/
