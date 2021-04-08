@@ -3,8 +3,7 @@ const axios = require('axios');
 const login = (app, paramObj, callback) => {
   axios.post('/api/auth', paramObj)
     .then((data) => {
-      const { user } = data.data;
-      callback(null, user);
+      callback(null, data.data);
   })
     .catch(err => {
       callback(err)
@@ -54,16 +53,16 @@ const createGroup = (userId, groupObj) => {
 }
 
 
-const getUserEvents = (app, userId) => {
+const getUserEvents = (app, userid, callback) => {
   axios({
     method: 'get',
-    url: `/api/${userId}/userevents`,
+    url: `/api/${userid}/userevents`,
   })
-  .then((data)=>{
-    app.setState({eventsShowing: data.data})
+  .then((data)=> {
+    callback(null, data.data)
   })
   .catch((err)=> {
-    console.error(err);
+    callback(err);
   })
 };
 
@@ -73,7 +72,6 @@ module.exports = {
   createUser,
   login,
   createGroup,
-  updateFreeTime,
   getFriends,
   getGroups,
 }

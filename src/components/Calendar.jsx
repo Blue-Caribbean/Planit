@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
-import requests from '../../requests/requests'
+import requests from '../../functions/requests';
 
 const localizer = momentLocalizer(moment);
 

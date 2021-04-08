@@ -4,14 +4,22 @@ import Signup from './intro/Signup';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
-import requests from '../../requests/requests'
+import requests from '../../functions/requests'
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 4,
+      user: {
+        first: null,
+        last: null,
+        email: null,
+        userId: null,
+        profilepic: null,
+        freetime: [],
+      },
+      events: [],
       signup: false,
       loggedIn: false,
       eventsShowing: [
@@ -33,7 +41,8 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { userId, eventsShowing, loggedIn, signup } = this.state;
+    const { user, eventsShowing, events, loggedIn, signup } = this.state;
+    const { userId } = user;
     if (!loggedIn) {
       return (
         <div id='app'>
