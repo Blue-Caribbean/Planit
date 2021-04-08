@@ -33,8 +33,8 @@ class Login extends React.Component {
       <label>
         Create an Account
         <form onSubmit={this.handleSubmit}>
-          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com"/>
-          <input id='password' type='password' placeholder='password' />
+          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com" required />
+          <input id='password' type='password' placeholder='password' required />
           <button type='submit'>Login</button>
           <button type='button' onClick={this.signup}>Signup</button>
         </form>
