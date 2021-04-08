@@ -1,4 +1,6 @@
 import React from 'react';
+import AddFriendsToGroup from './AddFriendsToGroup';
+import AddEvent from './AddEvent';
 
 class SidebarList extends React.Component {
   constructor(props) {
@@ -6,7 +8,6 @@ class SidebarList extends React.Component {
 
     this.state = {
       clicked: '',
-      clickedIndex: -1,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -15,19 +16,18 @@ class SidebarList extends React.Component {
     console.log(event);
     this.setState({
       clicked: event.target.innerHTML,
-      clickedIndex: event.target.key,
     });
   }
 
   render(props) {
     const { friends, groups, isGroupsSelected } = this.props;
-
+    const { clicked, clickedIndex } = this.state;
     if (isGroupsSelected === false) {
       return (
         <div className="sidebarList">
           <ul>
             {friends.map((friend, index) => (
-              <li key={index} onClick={this.handleClick}>
+              <li key={friend} onClick={this.handleClick}>
                 {friend}
               </li>
             ))}
@@ -45,10 +45,12 @@ class SidebarList extends React.Component {
     return (
       <div className="sidebarList">
         {groups.map((group, index) => (
-          <div key={index} onClick={this.handleClick} name={group}>
+          <div key={group} onClick={this.handleClick} name={index}>
             {group}
           </div>
         ))}
+        <AddFriendsToGroup group={groups[clickedIndex]} clicked={clicked} friends={friends} />
+        <AddEvent group={groups[clickedIndex]} clicked={clicked} />
       </div>
     );
   }

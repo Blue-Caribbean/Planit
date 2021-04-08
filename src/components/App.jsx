@@ -9,6 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: 4,
       signup: false,
       eventsShowing: [
         {
@@ -40,7 +41,7 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { eventsShowing, loggedIn, signup } = this.state;
+    const { userId, eventsShowing, loggedIn, signup } = this.state;
     if (!loggedIn) {
       return (
         <div id='app'>
@@ -49,10 +50,10 @@ class App extends React.Component {
       )
     }
     return (
-      <div id="app">
+      <div id="appjsx">
         <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} />
         <Sidebar />
-        <EventsUpcoming />
+        <EventsUpcoming userId={userId} />
       </div>
     );
   }
