@@ -62,6 +62,7 @@ const updateFreeTime = (userId, freeTimeArray, cb) => {
   });
 };
 
+
 const addToGroup = (userId, groupObj, cb) => {
   pg.pool.query(
     'INSERT INTO user_to_group (user_id, group_id) VALUES ($1, $2)',
@@ -75,7 +76,24 @@ const addToGroup = (userId, groupObj, cb) => {
     }
   );
 };
-
+const createGroupByUserId = (user_id, obj, cb) => {
+  //austin
+  const sql = 'INSERT INTO groups (group_name, private) VALUES ($1, $2) RETURNING id'
+  pg.pool.query(sql, [obj.group_name, obj.private], (err, results) => {
+    if (err) {
+      cb(err, null)
+    } else {
+      const groupObj = {group_id: results.rows[0].id}
+      addToGroup(user_id, groupObj, (err2, results2) => {
+        if (err) {
+          cb(err2, null);
+        } else {
+          cb(null, results2);
+        }
+      })
+    }
+  })
+}
 const getAllGroups = ({ group_name }, cb) => {
   pg.pool.query(
     'SELECT * FROM groups WHERE group_name like $1',
@@ -210,4 +228,5 @@ module.exports = {
   createEventByGroupId,
   getUserEvents,
   deleteFriend,
+  createGroupByUserId,
 };
