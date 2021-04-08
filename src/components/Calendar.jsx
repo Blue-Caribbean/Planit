@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 
 const localizer = momentLocalizer(moment);
@@ -9,22 +9,32 @@ class CalendarComponent extends React.Component {
     super();
     this.state = {
       canEdit: false,
+      prevEvents: [],
     };
     this.updateAvailability = this.updateAvailability.bind(this);
-    this.editAvailability = this.editAvailability.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.showMyCalendarHandler = this.showMyCalendarHandler.bind(this);
   }
 
-  updateAvailability() {
+  onCancel() {
     const { app } = this.props;
-    const self = this;
-    app.setState({ eventsShowing: [] }, () => {
-      self.setState({
-        canEdit: true,
-      });
-    });
+    const { prevEvents } = this.state;
+    this.setState(
+      { canEdit: false },
+      app.setState({
+        eventsShowing: prevEvents,
+      })
+    );
   }
 
-  editAvailability({ start, end }) {
+  onSubmit() {
+    // post request /api/:user_id/updatefreetime paramsObj = [array of events]
+    this.setState({ canEdit: false });
+  }
+
+  onChange({ start, end }) {
     const { app } = this.props;
     const { eventsShowing } = app.state;
     const tempArr = eventsShowing.slice();
@@ -33,10 +43,23 @@ class CalendarComponent extends React.Component {
       eventsShowing: tempArr,
     });
   }
-  // onClick event that clears current events array from state then makes calendar selectable
-  // allows user to slect free times
-  // saves free times to state
-  // on submit makes call to update freetimes
+
+  showMyCalendarHandler() {
+    const { getUserInfo } = this.props;
+    getUserInfo();
+  }
+
+  updateAvailability() {
+    const { app } = this.props;
+    const { eventsShowing } = app.state;
+    this.setState(
+      {
+        prevEvents: eventsShowing,
+        canEdit: true,
+      },
+      app.setState({ eventsShowing: [] })
+    );
+  }
 
   render() {
     const { events } = this.props;
@@ -44,23 +67,28 @@ class CalendarComponent extends React.Component {
     return (
       <>
         <h1>Planit</h1>
-        <h4>Show My Calendar</h4>
+        <h4 onClick={this.showMyCalendarHandler}>Show My Calendar</h4>
         <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
         {canEdit ? (
           <>
-            <button type="submit">Cancel</button>
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={this.onCancel}>
+              Cancel
+            </button>
+            <button type="submit" onClick={this.onSubmit}>
+              Submit
+            </button>
           </>
         ) : null}
         <Calendar
           selectable={canEdit}
           localizer={localizer}
+          defaultView={Views.WEEK}
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
-          onSelectEvent={(event) => alert(event.title)}
-          onSelectSlot={this.editAvailability}
+          style={{ height: '430px', width: '70%' }}
+          onSelectEvent={(event) => alert(`${event.title}, start: ${event.start}`)}
+          onSelectSlot={this.onChange}
         />
       </>
     );
