@@ -1,4 +1,5 @@
 import React from 'react';
+import { createUser } from '../../../requests/requests';
 
 class Signup extends React.Component {
   constructor() {
@@ -7,6 +8,7 @@ class Signup extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.goBack = this.goBack.bind(this);
+    this.signup =this.signup.bind(this);
   }
 
   handleChange(event) {
@@ -20,6 +22,24 @@ class Signup extends React.Component {
     const { app } = this.props;
     app.setState({ signup: false });
   }
+
+  signup() {
+    const app = this.props;
+    const {email, first, last} = this.state;
+    const paramObj = {
+      email,
+      first,
+      last,
+    }
+    createUser(app, paramObj, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        app.setState({signup: false});
+      }
+    })
+  }
+
 
   render() {
     return (
