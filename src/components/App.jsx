@@ -4,6 +4,8 @@ import Signup from './intro/Signup';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
+import requests from '../../requests/requests'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -25,18 +27,8 @@ class App extends React.Component {
   }
 
   getUserInfo() {
-    // make get request with username in state
-    // sets state with the events returned
-    this.setState({
-      eventsShowing: [
-        {
-          id: 0,
-          title: 'Example Event (Example Group)',
-          start: new Date(2021, 3, 0, 3, 20, 0),
-          end: new Date(2021, 3, 0, 3, 45, 0),
-        },
-      ],
-    });
+    const { userId } = this.state;
+    requests.getUserEvents(this, userId);
   }
 
   render() {
@@ -51,7 +43,7 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
-        <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} />
+        <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} userId={userId} />
         <Sidebar />
         <EventsUpcoming userId={userId} />
       </div>

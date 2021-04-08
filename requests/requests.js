@@ -13,19 +13,18 @@ const updateFreeTime = (userId, freeTimeObj) => {
       console.log('done')
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     })
 };
 
 
-const getUserEvents = (app, userid) => {
+const getUserEvents = (app, userId) => {
   axios({
     method: 'get',
-    url: `/api/${userid}/userevents`,
+    url: `/api/${userId}/userevents`,
   })
   .then((data)=>{
-    //Leeroy check this out
-    app.setState({eventsShowing: data.res})
+    app.setState({eventsShowing: data.data})
   })
   .catch((err)=> {
     console.error(err);
@@ -33,5 +32,6 @@ const getUserEvents = (app, userid) => {
 }
 
 module.exports = {
-  getUserEvents
+  getUserEvents,
+  updateFreeTime
 }
