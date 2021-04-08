@@ -27,7 +27,7 @@ Appjsx grid
 #appjsx {
   display: grid;
   grid-template-columns: 20% 80%;
-  grid-template-rows: 10% 40% 40%;
+  /* grid-template-rows: 10% 40% 40%; */
 }
 .navbar {
   grid-row: 1;
@@ -36,7 +36,7 @@ Appjsx grid
   grid-template-rows: 33% 33% 33%;
   grid-template-columns: 25% 25% 25% 25%;
 }
-}
+
 .navbar-logo-div {
   display: flex;
   font-family: 'Ubuntu', sans-serif;
@@ -50,11 +50,10 @@ Appjsx grid
   grid-row: 3;
   grid-column: 2;
 }
-.navbar-edit-avail{
+.navbar-edit-avail {
   display: flex;
-    grid-column: 3;
-    grid-row: 3;
-    justify-content: space-evenly;
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .rbc-calendar {
@@ -109,4 +108,23 @@ login
   font-size: 16px;
   margin: 3px;
   border-radius: 10px;
+}
+
+/*
+==================
+side bar
+==================
+*/
+#sidebarContainer {
+  grid-row: 2;
+}
+
+/*
+================
+events upcoming
+================
+*/
+.EventsUpcoming {
+  grid-row: 3;
+  grid-column: 1/5;
 }
