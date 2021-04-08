@@ -17,7 +17,7 @@ const createUser = (app, paramObj, callback) => {
   })
   .then(callback(null))
   .catch((err) => {callback(err)})
-}
+};
 
 const updateFreeTime = (userId, freeTimeObj) => {
   axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
@@ -25,7 +25,7 @@ const updateFreeTime = (userId, freeTimeObj) => {
       console.log('done')
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     })
 };
 
@@ -38,22 +38,22 @@ const createGroup = (userId, groupObj) => {
 }
 
 
-const getUserEvents = (app, userid) => {
+const getUserEvents = (app, userId) => {
   axios({
     method: 'get',
-    url: `/api/${userid}/userevents`,
+    url: `/api/${userId}/userevents`,
   })
   .then((data)=>{
-    //Lerroy check this out
-    app.setState({eventsShowing: data.res})
+    app.setState({eventsShowing: data.data})
   })
   .catch((err)=> {
     console.error(err);
   })
-}
+};
 
 module.exports = {
   getUserEvents,
+  updateFreeTime,
   createUser,
   login,
   createGroup,
