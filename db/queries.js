@@ -4,15 +4,6 @@ const pg = require('./index.js');
 moment().format();
 
 const getGroupFreeTime = (groupId, cb) => {
-  // Get all group users freetime. This is a heavier query, in
-  // future I think I'll probably store time on the user object in an array.
-  // Pull the groupId, join that with users in the group, join with freetime, process it.
-  // FIXME: just temporary stuff to work on for time intersection.
-  // const currentTime = moment();
-  // const currentTimePlusHour = moment(currentTime).add(1, 'hour');
-  // const currentTimePlusDay = moment(currentTime).add(1, 'day');
-  // debugger;
-  // select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=2;
   const query =
     'select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=$1';
   pg.pool.query(query, [groupId], (err, result) => {
@@ -23,6 +14,54 @@ const getGroupFreeTime = (groupId, cb) => {
     }
   });
 };
+
+const getGroupBestFreeTime = (groupId, cb) => {
+  const query =
+    'select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=$1';
+  pg.pool.query(query, [groupId], (err, result) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      // Process all of the time objects, we don't care about explicit date, just days.
+      // Start by sorting all the freetime objects by day.
+      const currentTime = moment();
+      const currentTimePlusHour = moment(currentTime).add(1, 'hour');
+      const currentTimePlusDay = moment(currentTime).add(1, 'day');
+      // First we'll create an object that contains all of the available times sorted by day, using starting on
+      // Store the largest amount of freetime slots key so that we don't have to iterate the object a second time.
+
+      let largest = 1; // Set to 1 because if everyone is spread out it's better to just return the freetime obj, there is no ideal time.
+      let largestKey = '';
+      const availableDays = {};
+      result.rows.forEach((timeObj) => {
+        const day = moment(timeObj.start).format('ddd');
+        if (!availableDays[day]) {
+          availableDays[day] = [timeObj];
+        } else {
+          availableDays[day].push(timeObj);
+          if (availableDays[day].length > largest) {
+            largest = availableDays[day].length;
+            largestKey = day;
+          }
+        }
+      });
+
+      // Hone in on freetimes on the most available day.
+      if (largest > 1) {
+        // Another pass on the data, this time we're looking for times that intersect.
+        // First sort the array based on earliest start time.
+        debugger;
+        availableDays[largestKey].sort((a, b) => moment(a.start) - moment(b.start));
+        debugger;
+        availableDays[largestKey].forEach((timeObj) => {});
+      } else {
+        cb(null, availableDays);
+      }
+    }
+  });
+};
+
+getGroupBestFreeTime(2, (err, res) => {});
 
 const checkUser = ({ email }, cb) => {
   pg.pool.query('SELECT * FROM users WHERE email=$1', [email], (err, result) => {
@@ -235,4 +274,5 @@ module.exports = {
   getUserEvents,
   deleteFriend,
   getGroupFreeTime,
+  getGroupBestFreeTime,
 };
