@@ -1,4 +1,28 @@
+const moment = require('moment');
 const pg = require('./index.js');
+
+moment().format();
+
+const getGroupFreeTime = (groupId, cb) => {
+  // Get all group users freetime. This is a heavier query, in
+  // future I think I'll probably store time on the user object in an array.
+  // Pull the groupId, join that with users in the group, join with freetime, process it.
+  // FIXME: just temporary stuff to work on for time intersection.
+  // const currentTime = moment();
+  // const currentTimePlusHour = moment(currentTime).add(1, 'hour');
+  // const currentTimePlusDay = moment(currentTime).add(1, 'day');
+  // debugger;
+  // select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=2;
+  const query =
+    'select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=$1';
+  pg.pool.query(query, [groupId], (err, result) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, result.rows);
+    }
+  });
+};
 
 const checkUser = ({ email }, cb) => {
   pg.pool.query('SELECT * FROM users WHERE email=$1', [email], (err, result) => {
@@ -210,4 +234,5 @@ module.exports = {
   createEventByGroupId,
   getUserEvents,
   deleteFriend,
+  getGroupFreeTime,
 };
