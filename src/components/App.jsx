@@ -4,7 +4,7 @@ import Signup from './intro/Signup';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
-import requests from '../../requests/requests'
+import requests from '../../functions/requests'
 
 
 class App extends React.Component {
@@ -52,11 +52,7 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
-<<<<<<< HEAD
-        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} />
-=======
         <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} userId={userId} />
->>>>>>> 3715261d05fa54291ea3731c30db063c2f70bd49
         <Sidebar />
         <EventsUpcoming userId={userId} />
       </div>
