@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
+import requests from '../../functions/requests';
 
 const localizer = momentLocalizer(moment);
 
@@ -30,7 +31,8 @@ class CalendarComponent extends React.Component {
   }
 
   onSubmit() {
-    // post request /api/:user_id/updatefreetime paramsObj = [array of events]
+    const { events, userId } = this.props;
+    requests.updateFreeTime(userId, events);
     this.setState({ canEdit: false });
   }
 

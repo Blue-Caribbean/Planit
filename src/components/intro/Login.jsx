@@ -1,5 +1,5 @@
 import React from 'react';
-import { login } from '../../../requests/requests';
+import { login, getUserEvents } from '../../../functions/requests';
 
 class Login extends React.Component {
   constructor() {
@@ -35,18 +35,32 @@ class Login extends React.Component {
     const { email } = this.state;
     const paramObj = { email };
     login(app, paramObj, (err, result) => {
+<<<<<<< HEAD
       if (err) {
         console.error(err);
       } else {
         app.setState({ user: result, loggedIn: true }, () => {
           console.log(app.state);
         });
+=======
+      if (err || !result ) {
+        console.error('user not found')
+      } else {
+        getUserEvents(app, result.id, (err, events) => {
+          if (err) {
+            console.error(err)
+          } else {
+            app.setState({user: result, loggedIn: true, events}, ()=> {console.log(app.state)})
+          }
+        })
+>>>>>>> e04a16ffd5641347d7a80551c408439130b44373
       }
     });
   }
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="login-div">
         <label>
           <h3>Sign In or Create an Account</h3>
@@ -85,6 +99,17 @@ class Login extends React.Component {
           </form>
         </label>
       </div>
+=======
+      <label>
+        Create an Account
+        <form onSubmit={this.handleLogin}>
+          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com" required onChange={this.handleChange} />
+          <input id='password' type='password' placeholder='password' required onChange={this.handleChange} />
+          <button type='submit'>Login</button>
+          <button type='button' onClick={this.handleSignup} >Signup</button>
+        </form>
+      </label>
+>>>>>>> e04a16ffd5641347d7a80551c408439130b44373
     );
   }
 }

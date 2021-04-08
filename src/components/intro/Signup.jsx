@@ -1,5 +1,5 @@
 import React from 'react';
-import { createUser } from '../../../requests/requests';
+import { createUser } from '../../../functions/requests';
 
 class Signup extends React.Component {
   constructor() {
