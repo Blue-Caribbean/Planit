@@ -1,4 +1,77 @@
+const mRange = require('moment-range');
+const Moment = require('moment');
 const pg = require('./index.js');
+const moment = mRange.extendMoment(Moment);
+moment().format();
+
+const getGroupFreeTime = (groupId, cb) => {
+  const query =
+    'select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=$1';
+  pg.pool.query(query, [groupId], (err, result) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, result.rows);
+    }
+  });
+};
+
+const getGroupBestFreeTime = (groupId, cb) => {
+  const query =
+    'select * from user_to_group join freetime on user_to_group.user_id=freetime.user_id where user_to_group.group_id=$1';
+  pg.pool.query(query, [groupId], (err, result) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      // FIXME: This is a nieve solution, but it's super cpu heavy. Need to improve the algo.
+      // Process all of the time objects, we don't care about explicit date, just days.
+      // Start by sorting all the freetime objects by day.
+
+      // First we'll create an object that contains all of the available times sorted by day, using starting on
+      // Store the largest amount of freetime slots key so that we don't have to iterate the object a second time.
+
+      let largest = 1; // Set to 1 because if everyone is spread out it's better to just return the freetime obj, there is no ideal time.
+      let largestKey = '';
+      const availableDays = {};
+      result.rows.forEach((timeObj) => {
+        const day = moment(timeObj.start).format('ddd');
+        if (!availableDays[day]) {
+          availableDays[day] = [timeObj];
+        } else {
+          availableDays[day].push(timeObj);
+          if (availableDays[day].length > largest) {
+            largest = availableDays[day].length;
+            largestKey = day;
+          }
+        }
+      });
+
+      // Hone in on freetimes on the most available day.
+      const ranges = [];
+      const overlap = {};
+      if (largest > 1) {
+        // Another pass on the data, this time we're looking for times that intersect.
+        // First sort the array based on earliest start time.
+        availableDays[largestKey].sort((a, b) => moment(a.start) - moment(b.start));
+        // Create our range objects
+        availableDays[largestKey].forEach((timeObj) => {
+          ranges.push(moment.range(timeObj.start, timeObj.end_time));
+        });
+        // Iterate range objects and look for overlaps.
+        for (let i = 0; i < ranges.length; i++) {
+          for (let j = i + 1; j < ranges.length; j++) {
+            if (ranges[j].contains(ranges[i])) {
+              overlap[`${i}${j}`] = { start: ranges[j].start, end: ranges[j].end };
+            }
+          }
+        }
+        cb(null, overlap);
+      } else {
+        cb(null, availableDays);
+      }
+    }
+  });
+};
 
 const checkUser = ({ email }, cb) => {
   pg.pool.query('SELECT * FROM users WHERE email=$1', [email], (err, result) => {
@@ -210,4 +283,6 @@ module.exports = {
   createEventByGroupId,
   getUserEvents,
   deleteFriend,
+  getGroupFreeTime,
+  getGroupBestFreeTime,
 };
