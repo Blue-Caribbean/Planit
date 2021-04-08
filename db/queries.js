@@ -65,6 +65,7 @@ const getGroupBestFreeTime = (groupId, cb) => {
             }
           }
         }
+        cb(null, overlap);
       } else {
         cb(null, availableDays);
       }
