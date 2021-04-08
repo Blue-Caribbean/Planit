@@ -29,17 +29,16 @@ const updateFreeTime = (userId, freeTimeObj) => {
 };
 
 
-const getUserEvents = (app, userid) => {
+const getUserEvents = (app, userid, callback) => {
   axios({
     method: 'get',
     url: `/api/${userid}/userevents`,
   })
-  .then((data)=>{
-    //Lerroy check this out
-    app.setState({eventsShowing: data.res})
+  .then((data)=> {
+    callback(data.data)
   })
   .catch((err)=> {
-    console.error(err);
+    callback(err);
   })
 }
 

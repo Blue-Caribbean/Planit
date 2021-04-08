@@ -14,8 +14,9 @@ class App extends React.Component {
         last: null,
         email: null,
         userId: null,
-        profilepic: null
+        profilepic: null,
       },
+      events: [],
       signup: false,
       loggedIn: false,
       eventsShowing: [

@@ -39,7 +39,6 @@ class Login extends React.Component {
       if (err || !result ) {
         console.error('user not found')
       } else {
-        debugger;
         app.setState({user: result, loggedIn: true }, ()=> {console.log(app.state)})
       }
     });
