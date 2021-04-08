@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 class EventsUpcoming extends React.Component {
@@ -8,23 +8,23 @@ class EventsUpcoming extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventsDataCollection: [ {}, {}, {} ],
-      dummyEventsDataCollection: [
+      // eventsDataCollection: [ {}, {}, {} ],
+      eventsDataCollection: [
         {id: 1, user_id: 5, event_id: 1, pending: 0, accepted: 1, name: 'Bowling Fridays', start_time: '2021-04-16T12:00:00.000-7:00', end_time: '2021-04-16T16:45:00.000-7:00', group_id: 2, group_name: 'Bowling', private: 0},
         {id: 3, user_id: 5, event_id: 4, pending: 0, accepted: 1, name: 'Gaming Tuesdays', start_time: '2021-04-20T19:00:00.000-7:00', end_time: '2021-04-21T01:00:00.000-7:00', group_id: 4, group_name: 'Gaming', private: 0},
         {id: 5, user_id: 5, event_id: 12, pending: 1, accepted: 0, name: 'M&E Housewarming', start_time: '2021-04-19T14:00:00.000-7:00', end_time: '2021-04-19T17:30:00.000-7:00', group_id: 6, group_name: 'Family', private: 0},
 
-        {id: 7, user_id: 5, event_id: 3, pending: 0, accepted: 1, name: 'EventE', start_time: '2021-05-03T21:00:00.000-7:00', end_time: '2021-05-03T22:45:00.000-7:00', group_id: 8, group_name: 'Group Name', private: 0},
-        {id: 9, user_id: 5, event_id: 15, pending: 0, accepted: 1, name: 'EventF', start_time: '2021-05-07T20:00:00.000-7:00', end_time: '2021-05-07T21:30:00.000-7:00', group_id: 9, group_name: 'Group Name', private: 0},
+        {id: 7, user_id: 5, event_id: 3, pending: 0, accepted: 1, name: 'Hawaiian Party', start_time: '2021-05-03T21:00:00.000-7:00', end_time: '2021-05-03T22:45:00.000-7:00', group_id: 8, group_name: 'College Friends', private: 0},
+        {id: 9, user_id: 5, event_id: 15, pending: 0, accepted: 1, name: 'Drinks with Claire', start_time: '2021-05-07T20:00:00.000-7:00', end_time: '2021-05-07T21:30:00.000-7:00', group_id: 9, group_name: 'College Friends', private: 0},
         {id: 8, user_id: 5, event_id: 7, pending: 1, accepted: 0, name: 'Pickup Soccer', start_time: '2021-05-09T13:00:00.000-7:00', end_time: '2021-05-09T15:30:00.000-7:00', group_id: 7, group_name: 'Soccer', private: 0},
 
-        {id: 6, user_id: 5, event_id: 9, pending: 0, accepted: 1, name: 'EventD', start_time: '2021-04-30T09:00:00.000-7:00', end_time: '2021-04-30T09:45:00.000-7:00', group_id: 5, group_name: 'Group Name', private: 0},
-        {id: 4, user_id: 5, event_id: 6, pending: 0, accepted: 1, name: 'EventG', start_time: '2021-05-15T08:00:00.000-7:00', end_time: '2021-05-15T11:00:00.000-7:00', group_id: 3, group_name: 'Group Name', private: 0},
-        {id: 2, user_id: 5, event_id: 2, pending: 0, accepted: 1, name: 'EventH', start_time: '2021-05-15T13:00:00.000-7:00', end_time: '2021-04-15T15:50:00.000-7:00', group_id: 1, group_name: 'Group Name', private: 0},
+        {id: 6, user_id: 5, event_id: 9, pending: 0, accepted: 1, name: 'Gaming Fridays', start_time: '2021-04-30T09:00:00.000-7:00', end_time: '2021-04-30T09:45:00.000-7:00', group_id: 5, group_name: 'Gaming', private: 0},
+        {id: 4, user_id: 5, event_id: 6, pending: 0, accepted: 1, name: 'Golf with Dad', start_time: '2021-05-15T08:00:00.000-7:00', end_time: '2021-05-15T11:00:00.000-7:00', group_id: 3, group_name: 'Family', private: 0},
+        {id: 2, user_id: 5, event_id: 2, pending: 0, accepted: 1, name: 'Board Games', start_time: '2021-05-15T13:00:00.000-7:00', end_time: '2021-04-15T15:50:00.000-7:00', group_id: 1, group_name: 'Gaming', private: 0},
 
-        {id: 10, user_id: 5, event_id: 5, pending: 0, accepted: 1, name: 'EventJ', start_time: '2021-05-21T13:00:00.000-7:00', end_time: '2021-05-21T16:50:00.000-7:00', group_id: 12, group_name: 'Group Name', private: 0},
-        {id: 12, user_id: 5, event_id: 17, pending: 0, accepted: 1, name: 'EventI', start_time: '2021-05-19T12:00:00.000-7:00', end_time: '2021-05-19T19:00:00.000-7:00', group_id: 10, group_name: 'Group Name', private: 0},
-        {id: 11, user_id: 5, event_id: 31, pending: 0, accepted: 1, name: 'EventK', start_time: '2021-05-25T06:00:00.000-7:00', end_time: '2021-05-25T08:15:00.000-7:00', group_id: 11, group_name: 'Group Name', private: 0}
+        // {id: 10, user_id: 5, event_id: 5, pending: 0, accepted: 1, name: 'EventJ', start_time: '2021-05-21T13:00:00.000-7:00', end_time: '2021-05-21T16:50:00.000-7:00', group_id: 12, group_name: 'Group Name', private: 0},
+        // {id: 12, user_id: 5, event_id: 17, pending: 0, accepted: 1, name: 'EventI', start_time: '2021-05-19T12:00:00.000-7:00', end_time: '2021-05-19T19:00:00.000-7:00', group_id: 10, group_name: 'Group Name', private: 0},
+        // {id: 11, user_id: 5, event_id: 31, pending: 0, accepted: 1, name: 'EventK', start_time: '2021-05-25T06:00:00.000-7:00', end_time: '2021-05-25T08:15:00.000-7:00', group_id: 11, group_name: 'Group Name', private: 0}
       ],
       // noticedRsvpClickEvent: false,
       // rsvpResponse: null,
@@ -42,34 +42,30 @@ class EventsUpcoming extends React.Component {
     this.sortEventsUpcomingCollectionByDate();
   }
 
-  getUsersToEventsEventGroupsData() {
-    // const {userId} = this.props;
-    // let userId = 1;
-    // axios
-    //   .get(`/api/${userId}/userevents`)
-    //   .then((response) => {
-    //     this.setState(() => {
-    //       return {
-    //         eventsDataCollection: response.data
-    //       }
-    //     })
-    //   })
-    //   .catch((error) => {
-    //     console.log('Data retrieval failed: client EventsUpcoming GET (UsersToEvents table) & (Event table)', error);
-    //   })
-    /*
-    ** app.get('/api/:userid/userevents', (req, res) => {
-    **   //gets user events. this is a huge query very heavy.
-    ** });
-    */
-  }
+  // getUsersToEventsEventGroupsData() {
+  //   const { userId } = this.props;
+  //   axios
+  //     .get(`/api/${userId}/userevents`)
+  //     .then((response) => {
+  //       this.setState(() => {
+  //         return {
+  //           eventsDataCollection: response.data
+  //         }
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       console.log('Data retrieval failed: client EventsUpcoming GET (UsersToEvents table) & (Event table)', error);
+  //     })
+  //   /*
+  //   ** app.get('/api/:userid/userevents', (req, res) => {
+  //   **   //gets user events. this is a huge query very heavy.
+  //   ** });
+  //   */
+  // }
 
   sortEventsUpcomingCollectionByDate() {
-    // {eventsDataCollection} = this.state;
-    const {dummyEventsDataCollection} = this.state;
+    const { eventsDataCollection } = this.state;
     // Ecma Standard international standard ISO/IEC:[https://262.ecma-international.org/5.1/#sec-15.9.1.15]
-    // How to Sort Array of Objects by Date in JavaScript (DESCENDING):[https://onthecode.co.uk/how-to-sort-array-of-objects-by-date-in-javascript/]
-    // How to Sort an Array of Dates with JavaScript:[https://gist.github.com/onpubcom/1772996]
     const organizeDatesSoonestToLatest = (function(a, b) {
       if ( a.start_time > b.start_time ) {
         return 1;
@@ -79,11 +75,9 @@ class EventsUpcoming extends React.Component {
       }
       return 0;
     });
-    // .sort() reorganizes existing collection
-    dummyEventsDataCollection.sort(organizeDatesSoonestToLatest);
-
+    eventsDataCollection.sort(organizeDatesSoonestToLatest);
     this.setState({
-      dummyEventsDataCollection: dummyEventsDataCollection
+      eventsDataCollection: eventsDataCollection
     })
   }
 
@@ -109,7 +103,7 @@ class EventsUpcoming extends React.Component {
     // [][][] | [1][4][7]
     // [][][] < [2][5][8]
     // [][][] | [3][6][9]
-    const {eventsOfNineOnPanelNumber} = this.state
+    const { eventsOfNineOnPanelNumber } = this.state
     if (eventsOfNineOnPanelNumber === 0) {
       this.setState({
         eventsOfNineOnPanelNumber: 1
@@ -128,6 +122,7 @@ class EventsUpcoming extends React.Component {
     // [1][4][7] | [][][]
     // [2][5][8] > [][][]
     // [3][6][9] | [][][]
+    const { eventsOfNineOnPanelNumber } = this.state
     if (eventsOfNineOnPanelNumber === 0) {
       this.setState({
         eventsOfNineOnPanelNumber: 1
@@ -143,11 +138,10 @@ class EventsUpcoming extends React.Component {
   render() {
     // _prop userId={userId} viaApp
     const { userId } = this.props;
-    //console.log('EventsUpcoming_render userId#:', userId);
+    // console.log('EventsUpcoming_render userId#:', userId);
     // _state eventsDataCollection
-    // const { eventsDataCollection } = this.state;
-    // _state dummyEventsDataCollection
-    const { dummyEventsDataCollection } = this.state;
+    const { eventsDataCollection } = this.state;
+    // console.log('EventsUpcoming_render eventsDataCollection:', eventsDataCollection);
 
     // <<<<<< userEventTilesAwaitingRsvp
     // | date.day#  |  event.title       |
@@ -172,7 +166,7 @@ class EventsUpcoming extends React.Component {
         <div className="eventsTiles">
           <ul>
             {/* {userEventTilesAwaitingRsvp} */}
-            {dummyEventsDataCollection.map((event) => {
+            {eventsDataCollection.map((event) => {
               if (event.pending === 1) {
                 return (
                   <li key={event.event_id} id="eventTile">
@@ -215,7 +209,7 @@ class EventsUpcoming extends React.Component {
               }
             })}
             {/* {userEventTilesUpcomingEvent} */}
-            {dummyEventsDataCollection.map((event) => {
+            {eventsDataCollection.map((event) => {
               if (event.accepted === 1) {
                 return (
                   <li key={event.event_id} id="eventTile">
@@ -254,8 +248,8 @@ class EventsUpcoming extends React.Component {
 
 }
 
-// EventsUpcoming.propTypes = {
-//   userId: PropTypes.number.isRequired
-// }
+EventsUpcoming.propTypes = {
+  userId: PropTypes.number.isRequired
+}
 
 export default EventsUpcoming;
