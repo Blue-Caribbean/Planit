@@ -44,10 +44,10 @@ class App extends React.Component {
     const { userId, eventsShowing, loggedIn, signup } = this.state;
     if (!loggedIn) {
       return (
-        <div id='app'>
-          {signup ? <Signup app={app} /> : <Login app={app} /> }
+        <div id="app" className="login-signup">
+          {signup ? <Signup app={app} /> : <Login app={app} />}
         </div>
-      )
+      );
     }
     return (
       <div id="appjsx">
