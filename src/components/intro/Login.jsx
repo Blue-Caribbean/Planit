@@ -17,7 +17,6 @@ class Login extends React.Component {
     this.setState({ [key]: val });
   }
 
-
   handleSubmit(event) {
     event.preventDefault();
     const { app } = this.props;
@@ -27,34 +26,58 @@ class Login extends React.Component {
 
   handleSignup() {
     const { app } = this.props;
-    app.setState({signup: true});
+    app.setState({ signup: true });
   }
 
   handleLogin(event) {
-    event.preventDefault()
+    event.preventDefault();
     const { app } = this.props;
     const { email } = this.state;
-    const paramObj = {email};
+    const paramObj = { email };
     login(app, paramObj, (err, result) => {
       if (err) {
-        console.error(err)
+        console.error(err);
       } else {
-        app.setState({user: result, loggedIn: true }, () => {console.log(app.state)})
+        app.setState({ user: result, loggedIn: true }, () => {
+          console.log(app.state);
+        });
       }
     });
   }
 
   render() {
     return (
-      <label>
-        Create an Account
-        <form onSubmit={this.handleSubmit}>
-          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com" required onChange={this.handleChange} />
-          <input id='password' type='password' placeholder='password' required onChange={this.handleChange} />
-          <button type='submit'>Login</button>
-          <button type='button' onClick={this.handleSignup} >Signup</button>
-        </form>
-      </label>
+      <div className="login-div">
+        <label>
+          Create an Account
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-email">
+              <input
+                id="email"
+                type="email"
+                pattern="[^@\s]+@[^@\s]+"
+                title="Invalid email address"
+                placeholder="example@email.com"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-password">
+              <input
+                id="password"
+                type="password"
+                placeholder="password"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <button type="submit">Login</button>
+            <button type="button" onClick={this.handleSignup}>
+              Signup
+            </button>
+          </form>
+        </label>
+      </div>
     );
   }
 }

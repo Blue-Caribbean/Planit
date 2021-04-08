@@ -4,3 +4,9 @@ login
 =====================
 */
 
+.login-signup {
+  display: flex;
+  justify-content: center;
+  margin-top: 25%;
+  background-color: rgb(255, 187, 0);
+}
