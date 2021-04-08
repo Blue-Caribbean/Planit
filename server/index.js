@@ -91,6 +91,13 @@ app.delete('/api/:userid/deletefriend', (req, res) => {
 app.post('/api/searchfriends', (req, res) => {
   // Searches the db for email or name string that matches query.
   // returns list of names which comes along with id.
+  queries.searchFriends(req.body, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
 });
 
 app.get('/api/:userid/groups', (req, res) => {

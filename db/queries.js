@@ -44,7 +44,7 @@ const updateFreeTime = (userId, freeTimeArray, cb) => {
     if (err) {
       cb(err, null);
     } else {
-      // Another slow query here. It might make more sense to use 2d array.
+      // Another slow query here. It might make more sense to use 2d array. [[date start, date end],] timestamp[][]
       freeTimeArray.forEach((obj) => {
         pg.pool.query(
           'INSERT INTO freetime (user_id, start, end_time) VALUES ($1, $2, $3)',
@@ -105,22 +105,27 @@ const getGroupsById = (userId, cb) => {
 
 const createEventByGroupId = (groupId, eventObj, cb) => {
   const { name, start_time, end_time } = eventObj;
-  let sql = 'INSERT INTO event (name, start_time, end_time, group_id) VALUES ($1, $2, $3, $4)';
+  const sql = 'INSERT INTO event (name, start_time, end_time, group_id) VALUES ($1, $2, $3, $4)';
+  //this query creates the event
   pg.pool.query(sql, [name, start_time, end_time, groupId], (err, results) => {
     if (err) {
       cb(err, null);
     } else {
-      //now i pull the userids from the group id
+      // now i pull the userids from the group id
       let sql2 = 'select user_id from user_to_group where group_id = $1';
-      pg.pool.query(sql2, [groupId], (error, results2) => {
-        if (error) {
-          cb(err, null);
+      pg.pool.query(sql2, [groupId], (err2, results2) => {
+        if (err2) {
+          cb(err2, null);
         } else {
-          debugger;
+          const { rows } = results2;
+          const sql3 = 'INSERT INTO users_to_events (user_id, event_id) VALUES ($1, $2)';
+          //for each of them - insert into the join table
+          rows.forEach((idObj) => {
+            pg.pool.query(sql3, [idObj.user_id, groupId]);
+          });
+          cb(null, 'done');
         }
       });
-      // select user_id from user_to_group where group_id = (groupId)
-      //cb(null, results);
     }
   });
 };
@@ -152,7 +157,7 @@ const addFriend = (userID, friendID, cb) => {
 const deleteFriend = (userID, friendID, cb) => {
   const sql = `DELETE FROM friends WHERE (user_id = ${userID} AND friend_id = ${friendID})`;
   const sqlTwo = `DELETE FROM friends WHERE (user_id = ${friendID} AND friend_id = ${userID})`;
-  pg.pool.query(sql, (err, data) => {
+  pg.pool.query(sql, (err) => {
     if (err) {
       cb(err);
     } else {
