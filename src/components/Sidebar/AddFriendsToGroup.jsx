@@ -75,6 +75,7 @@ class AddFriendsToGroup extends React.Component {
   }
 
   openModal() {
+    console.log('opening');
     this.setState({
       modalIsOpen: true,
     });

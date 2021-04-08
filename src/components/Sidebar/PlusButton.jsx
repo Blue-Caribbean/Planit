@@ -38,7 +38,27 @@ class PlusButton extends React.Component {
     });
   }
 
+  handleListClick(event) {
+    /*
+      push the clicked item into your array.
+    */
+
+    const { newMembers } = this.state;
+
+    let temp = newMembers;
+    temp.push(event.target.innerHTML);
+
+    this.setState({
+      newMembers: temp,
+      searchBarTerm: '',
+      invalidBruh: false,
+    });
+  }
+
   handleChange(event) {
+    /*
+      We have to refactor all of this to look like our other search bar.
+    */
     this.setState({
       searchBarTerm: event.target.value,
     });
@@ -61,15 +81,18 @@ class PlusButton extends React.Component {
         <div id="modalDiv">
           <button onClick={this.openModal}>+</button>
           <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
-            <h2>Search for friends</h2>
+            <h2>Add Friends</h2>
+            <h3>Click a Friend to Add</h3>
             <input type="text" placeholder="Search Friends" onChange={this.handleChange} />
             <div className="searchBarList">
               <ul>
-                {friends.map((friend, index) => (
-                  <li key={index} onClick={this.handleClick}>
-                    {friend}
-                  </li>
-                ))}
+                {friends
+                  .filter((friend) => friend.toLowerCase().includes(searchBarTerm.toLowerCase()))
+                  .map((friend, index) => (
+                    <li key={index} onClick={this.handleClick}>
+                      {friend}
+                    </li>
+                  ))}
               </ul>
             </div>
             <button>Add Friend</button>
@@ -89,7 +112,7 @@ class PlusButton extends React.Component {
       <div id="modalDiv">
         <button onClick={this.openModal}>+</button>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
-          <h2>Search for friends</h2>
+          <h2>Search and select a group</h2>
           <input type="text" placeholder="Search Groups" />
           <div className="sidebarList">
             {groups.map((group, index) => (
@@ -99,7 +122,7 @@ class PlusButton extends React.Component {
             ))}
           </div>
           <button>Add Group</button>
-          <h2>Create Group</h2>
+          <h2>Create a New Group</h2>
           <div className="createGroup">
             <input type="text" placeholder="Group Name" />
             <button>Create</button>
