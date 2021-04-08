@@ -1,4 +1,5 @@
 import React from 'react';
+import { login } from '../../../requests/requests';
 
 class Login extends React.Component {
   constructor() {
@@ -6,7 +7,8 @@ class Login extends React.Component {
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
+    this.signup = this.handleSignup.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleChange(event) {
@@ -23,9 +25,23 @@ class Login extends React.Component {
     //GET request  /api/auth paramObj = {email: emailAddress}
   }
 
-  signup() {
+  handleSignup() {
     const { app } = this.props;
     app.setState({signup: true});
+  }
+
+  handleLogin(event) {
+    event.preventDefault()
+    const { app } = this.props;
+    const { email } = this.state;
+    const paramObj = {email};
+    login(app, paramObj, (err, result) => {
+      if (err) {
+        console.error(err)
+      } else {
+        app.setState({user: result, loggedIn: true }, () => {console.log(app.state)})
+      }
+    });
   }
 
   render() {
@@ -33,10 +49,10 @@ class Login extends React.Component {
       <label>
         Create an Account
         <form onSubmit={this.handleSubmit}>
-          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com"/>
-          <input id='password' type='password' placeholder='password' />
+          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com" required onChange={this.handleChange} />
+          <input id='password' type='password' placeholder='password' required onChange={this.handleChange} />
           <button type='submit'>Login</button>
-          <button type='button' onClick={this.signup}>Signup</button>
+          <button type='button' onClick={this.handleSignup} >Signup</button>
         </form>
       </label>
     );
