@@ -49,7 +49,8 @@ class Login extends React.Component {
     return (
       <div className="login-div">
         <label>
-          Create an Account
+          <h3>Sign In or Create an Account</h3>
+          <hr />
           <form onSubmit={this.handleSubmit}>
             <div className="form-email">
               {'E-Mail: '}
@@ -74,8 +75,10 @@ class Login extends React.Component {
               />
             </div>
             <div className="form-buttons-div">
-              <button type="submit">Login</button>
-              <button type="button" onClick={this.handleSignup}>
+              <button className="form-button" type="submit">
+                Login
+              </button>
+              <button className="form-button" type="button" onClick={this.handleSignup}>
                 Signup
               </button>
             </div>
