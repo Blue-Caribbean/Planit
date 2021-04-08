@@ -16,7 +16,7 @@ const createUser = (app, paramObj, callback) => {
   })
   .then(callback(null))
   .catch((err) => {callback(err)})
-}
+};
 
 const updateFreeTime = (userId, freeTimeObj) => {
   axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
@@ -24,9 +24,17 @@ const updateFreeTime = (userId, freeTimeObj) => {
       console.log('done')
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     })
 };
+
+const createGroup = (userId, groupObj) => {
+  axios({
+    method: 'post',
+    url: `/api/${userid}/creategroup`,
+    data: groupObj
+  })
+}
 
 
 const getUserEvents = (app, userid, callback) => {
@@ -40,10 +48,12 @@ const getUserEvents = (app, userid, callback) => {
   .catch((err)=> {
     callback(err);
   })
-}
+};
 
 module.exports = {
   getUserEvents,
+  updateFreeTime,
   createUser,
   login,
+  createGroup,
 }
