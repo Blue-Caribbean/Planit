@@ -150,7 +150,6 @@ const addToGroup = (userId, groupObj, cb) => {
   );
 };
 const createGroupByUserId = (user_id, obj, cb) => {
-  //austin
   const sql = 'INSERT INTO groups (group_name, private) VALUES ($1, $2) RETURNING id'
   pg.pool.query(sql, [obj.group_name, obj.private], (err, results) => {
     if (err) {

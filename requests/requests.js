@@ -29,6 +29,14 @@ const updateFreeTime = (userId, freeTimeObj) => {
     })
 };
 
+const createGroup = (userId, groupObj) => {
+  axios({
+    method: 'post',
+    url: `/api/${userid}/creategroup`,
+    data: groupObj
+  })
+}
+
 
 const getUserEvents = (app, userid) => {
   axios({
@@ -48,4 +56,6 @@ module.exports = {
   getUserEvents,
   createUser,
   login,
+  createGroup,
+  updateFreeTime
 }
