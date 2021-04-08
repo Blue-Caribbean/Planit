@@ -48,7 +48,7 @@ class Login extends React.Component {
     return (
       <label>
         Create an Account
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleLogin}>
           <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com" required onChange={this.handleChange} />
           <input id='password' type='password' placeholder='password' required onChange={this.handleChange} />
           <button type='submit'>Login</button>
