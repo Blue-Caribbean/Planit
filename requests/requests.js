@@ -7,6 +7,17 @@ const login = (app, paramObj) => {
   });
 };
 
+const updateFreeTime = (userId, freeTimeObj) => {
+  axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
+    .then(() => {
+      console.log('done')
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+
+
 const getUserEvents = (app, userid) => {
   axios({
     method: 'get',
