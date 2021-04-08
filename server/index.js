@@ -147,7 +147,7 @@ app.get('/api/:userid/friends', (req, res) => {
 
 app.get('/api/:userid/userevents', (req, res) => {
   // actually not so bad.
-  queries.getUserEvents(req.params.id, (err, result) => {
+  queries.getUserEvents(req.params.userid, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {

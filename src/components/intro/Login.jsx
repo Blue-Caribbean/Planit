@@ -1,5 +1,5 @@
 import React from 'react';
-import { login } from '../../../requests/requests';
+import { login, getUserEvents } from '../../../requests/requests';
 
 class Login extends React.Component {
   constructor() {
@@ -39,7 +39,13 @@ class Login extends React.Component {
       if (err || !result ) {
         console.error('user not found')
       } else {
-        app.setState({user: result, loggedIn: true }, ()=> {console.log(app.state)})
+        getUserEvents(app, result.id, (err, events) => {
+          if (err) {
+            console.error(err)
+          } else {
+            app.setState({user: result, loggedIn: true, events}, ()=> {console.log(app.state)})
+          }
+        })
       }
     });
   }

@@ -35,7 +35,7 @@ const getUserEvents = (app, userid, callback) => {
     url: `/api/${userid}/userevents`,
   })
   .then((data)=> {
-    callback(data.data)
+    callback(null, data.data)
   })
   .catch((err)=> {
     callback(err);
