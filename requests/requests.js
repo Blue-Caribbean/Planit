@@ -6,3 +6,15 @@ const login = (app, paramObj) => {
     app.setState({ user: user });
   });
 };
+
+const updateFreeTime = (userId, freeTimeObj) => {
+  axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
+    .then(() => {
+      console.log('done')
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+
+
