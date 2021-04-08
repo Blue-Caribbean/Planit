@@ -1,5 +1,5 @@
 import React from 'react';
-import { login, getUserEvents } from '../../../requests/requests';
+import { login, getUserEvents } from '../../../functions/requests';
 
 class Login extends React.Component {
   constructor() {
