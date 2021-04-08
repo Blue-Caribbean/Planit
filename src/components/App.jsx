@@ -11,7 +11,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 4,
+      user: {
+        first: null,
+        last: null,
+        email: null,
+        userId: null,
+        profilepic: null,
+        freetime: [],
+      },
+      events: [],
       signup: false,
       loggedIn: false,
       eventsShowing: [
@@ -33,7 +41,8 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { userId, eventsShowing, loggedIn, signup } = this.state;
+    const { user, eventsShowing, events, loggedIn, signup } = this.state;
+    const { userId } = user;
     if (!loggedIn) {
       return (
         <div id='app'>
@@ -43,7 +52,11 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
+<<<<<<< HEAD
+        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} />
+=======
         <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} userId={userId} />
+>>>>>>> 3715261d05fa54291ea3731c30db063c2f70bd49
         <Sidebar />
         <EventsUpcoming userId={userId} />
       </div>

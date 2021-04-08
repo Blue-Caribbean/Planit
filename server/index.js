@@ -29,6 +29,7 @@ app.post('/api/searchfriends', (req, res) => {
 });
 
 app.post('/api/auth', (req, res) => {
+  console.log(req.body);
   // Check for user in db, if no user create new user.
   // send back id if user exists.
   // if the user doesn't exist handle on the frontend.
@@ -163,7 +164,7 @@ app.get('/api/:userid/friends', (req, res) => {
 
 app.get('/api/:userid/userevents', (req, res) => {
   // actually not so bad.
-  queries.getUserEvents(req.params.id, (err, result) => {
+  queries.getUserEvents(req.params.userid, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {
