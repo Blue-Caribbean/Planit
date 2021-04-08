@@ -1,5 +1,6 @@
 import React from 'react';
 import AddFriendsToGroup from './AddFriendsToGroup';
+import AddEvent from './AddEvent';
 
 class SidebarList extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class SidebarList extends React.Component {
           </div>
         ))}
         <AddFriendsToGroup group={groups[clickedIndex]} clicked={clicked} friends={friends} />
+        <AddEvent group={groups[clickedIndex]} clicked={clicked} />
       </div>
     );
   }
