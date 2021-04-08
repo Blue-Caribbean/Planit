@@ -7,6 +7,17 @@ const port = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+app.get('/api/:groupid/groupfreetime', (req, res) => {
+  // Returns an array of freetime objects for all users in the group.
+  queries.getGroupFreeTime(req.params.groupid, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
 app.post('/api/searchfriends', (req, res) => {
   queries.searchFriends(req.body, (err, result) => {
     if (err) {
