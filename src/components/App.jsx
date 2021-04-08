@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       signup: false,
+      loggedIn: false,
       eventsShowing: [
         {
           id: 0,
@@ -18,7 +19,6 @@ class App extends React.Component {
           end: new Date(2021, 3, 0, 3, 45, 0),
         },
       ],
-      loggedIn: false,
     };
     this.getUserInfo = this.getUserInfo.bind(this);
   }
