@@ -1,6 +1,7 @@
-const moment = require('moment');
+const mRange = require('moment-range');
+const Moment = require('moment');
 const pg = require('./index.js');
-
+const moment = mRange.extendMoment(Moment);
 moment().format();
 
 const getGroupFreeTime = (groupId, cb) => {
@@ -22,6 +23,7 @@ const getGroupBestFreeTime = (groupId, cb) => {
     if (err) {
       cb(err, null);
     } else {
+      // FIXME: This is a nieve solution, but it's super cpu heavy. Need to improve the algo.
       // Process all of the time objects, we don't care about explicit date, just days.
       // Start by sorting all the freetime objects by day.
       const currentTime = moment();
@@ -47,13 +49,15 @@ const getGroupBestFreeTime = (groupId, cb) => {
       });
 
       // Hone in on freetimes on the most available day.
+      const ranges = [];
+
       if (largest > 1) {
         // Another pass on the data, this time we're looking for times that intersect.
         // First sort the array based on earliest start time.
-        debugger;
         availableDays[largestKey].sort((a, b) => moment(a.start) - moment(b.start));
-        debugger;
-        availableDays[largestKey].forEach((timeObj) => {});
+        availableDays[largestKey].forEach((timeObj) => {
+          ranges.push(moment.range(timeObj.start, timeObj.end_time));
+        });
       } else {
         cb(null, availableDays);
       }
