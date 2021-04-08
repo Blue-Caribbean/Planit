@@ -44,8 +44,10 @@ class App extends React.Component {
     const { userId, eventsShowing, loggedIn, signup } = this.state;
     if (!loggedIn) {
       return (
-        <div id="app" className="login-signup">
-          {signup ? <Signup app={app} /> : <Login app={app} />}
+        <div className="login-outer-div">
+          <div id="app" className="login-signup">
+            {signup ? <Signup app={app} /> : <Login app={app} />}
+          </div>
         </div>
       );
     }

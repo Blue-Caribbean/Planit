@@ -52,6 +52,7 @@ class Login extends React.Component {
           Create an Account
           <form onSubmit={this.handleSubmit}>
             <div className="form-email">
+              {'E-Mail: '}
               <input
                 id="email"
                 type="email"
@@ -63,6 +64,7 @@ class Login extends React.Component {
               />
             </div>
             <div className="form-password">
+              {'Password: '}
               <input
                 id="password"
                 type="password"
@@ -71,10 +73,12 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <button type="submit">Login</button>
-            <button type="button" onClick={this.handleSignup}>
-              Signup
-            </button>
+            <div className="form-buttons-div">
+              <button type="submit">Login</button>
+              <button type="button" onClick={this.handleSignup}>
+                Signup
+              </button>
+            </div>
           </form>
         </label>
       </div>
