@@ -35,11 +35,11 @@ class Login extends React.Component {
     const { app } = this.props;
     const { email } = this.state;
     const paramObj = { email };
-    login(app, paramObj, (err, result) => {
+    login(paramObj, (err, result) => {
       if (err || !result) {
         console.error('user not found');
       } else {
-        getUserEvents(app, result.id, (err, events) => {
+        getUserEvents(result.id, (err, events) => {
           if (err) {
             console.error(err);
           } else {
