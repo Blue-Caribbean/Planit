@@ -35,9 +35,9 @@ app.post('/api/auth', (req, res) => {
   // if the user doesn't exist handle on the frontend.
   queries.checkUser(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.status(401).send(err);
     } else {
-      res.status(200).send(result);
+      res.status(201).send(result);
     }
   });
 });
@@ -57,21 +57,21 @@ app.post('/api/createuser', (req, res) => {
 */
   queries.createUser(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(result);
+      res.status(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.status(200).send(result.toString());
     }
   });
 });
 app.post('/api/:userid/creategroup', (req, res) => {
-  queries.createGroupByUserId(req.params.userid, req.body, (err, results)=>{
+  queries.createGroupByUserId(req.params.userid, req.body, (err, results) => {
     if (err) {
-      res.status(400).send(err)
-    } else{
-      res.status(200).send(results)
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results);
     }
-  })
-})
+  });
+});
 app.put('/api/:userid/updatefreetime', (req, res) => {
   // user_id to select, and clear all existing free time relating to that user.
   // then insert the new freetime.
@@ -174,7 +174,6 @@ app.get('/api/:userid/userevents', (req, res) => {
 });
 
 app.post('/api/:groupid/event', (req, res) => {
-
   queries.createEventByGroupId(req.params.groupid, req.body, (err, results) => {
     if (err) {
       res.status(400).send(err);
