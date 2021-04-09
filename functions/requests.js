@@ -33,8 +33,8 @@ const getGroups = (userId) => {
   })
 }
 
-const updateFreeTime = (userId, freeTimeObj) => {
-  axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
+const updateFreeTime = (userId, freeTime) => {
+  axios.put(`/api/${userId}/updatefreetime`, {freeTime})
     .then(() => {
       console.log('done')
     })
@@ -66,6 +66,12 @@ const getUserEvents = (app, userid, callback) => {
   })
 };
 
+const createGroupEvent = (app, groupid, eventsObj, callback) => {
+  axios.post(`/api/${groupid}/event`, eventsObj)
+  .then(callback(null))
+  .catch((err) => {callback(err)})
+};
+
 module.exports = {
   getUserEvents,
   updateFreeTime,
@@ -74,4 +80,5 @@ module.exports = {
   createGroup,
   getFriends,
   getGroups,
+  createGroupEvent,
 }
