@@ -19,11 +19,36 @@ class Sidebar extends React.Component {
     this.updateFriends = this.updateFriends.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.updateGroups();
+    this.updateFriends();
+  }
 
-  updateGroups() {}
+  updateGroups() {
+    const { userID } = this.props;
+    requests.getGroups(userID, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setState({
+          groups: result,
+        });
+      }
+    });
+  }
 
-  updateFriends() {}
+  updateFriends() {
+    const { userID } = this.props;
+    requests.getFriends(userID, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setState({
+          friends: result,
+        });
+      }
+    });
+  }
 
   handleToggle(event) {
     const { groupsSelected } = this.state;
