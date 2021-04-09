@@ -291,7 +291,7 @@ class EventsUpcoming extends React.Component {
                     {/* {`${moment(event.start_time.slice(11, 16), 'HH:mm').format('h:mm a')}`} */}
                     {/* <br></br> */}
                     {`Group: ${event.group_name}`}
-                    {/* <br></br> */}
+                    {/* <br></br> a*/}
                   </span>
                   <br />
                   <span id="tileRsvpButtonYes">
