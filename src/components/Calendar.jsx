@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import requests from '../../functions/requests';
-import { convertEvents } from '../../functions/helpers';
+import { convertFreeTime } from '../../functions/helpers';
 
 const localizer = momentLocalizer(moment);
 
@@ -63,7 +63,7 @@ class CalendarComponent extends React.Component {
   showFreeTime() {
     const { app } = this.props;
     const { events, user } = app.state;
-    this.setState({prevEvents: events}, app.setState({events: convertEvents(user.freetime)}))
+    this.setState({prevEvents: events}, app.setState({events: convertFreeTime(user.freetime)}))
   }
 
   updateAvailability() {
@@ -88,7 +88,7 @@ class CalendarComponent extends React.Component {
             <img src="globe.png" alt="planitlogo" className="logo" /> <h1>Planit</h1>
           </div>
           <div className="navbar-show-calendar">
-            <h4 onClick={this.showMyCalendarHandler}>Show My Calendar</h4>
+            <h4 onClick={this.showFreeTime}>Show My Calendar</h4>
           </div>
           <div className="navbar-edit-calendar">
             <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
