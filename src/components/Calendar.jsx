@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import requests from '../../functions/requests';
+import { convertEvents } from '../../functions/helpers';
 
 const localizer = momentLocalizer(moment);
 
@@ -17,6 +18,7 @@ class CalendarComponent extends React.Component {
     this.onCancel = this.onCancel.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.showMyCalendarHandler = this.showMyCalendarHandler.bind(this);
+    this.showFreeTime = this.showFreeTime.bind(this);
   }
 
   onCancel() {
@@ -31,9 +33,9 @@ class CalendarComponent extends React.Component {
   }
 
   onSubmit() {
-    const { events, userId, app } = this.props;
+    const { events, user, app } = this.props;
     const { prevEvents } = this.state;
-    requests.updateFreeTime(userId, events, (err) => {
+    requests.updateFreeTime(user.id, events, (err) => {
       if (err) {
         console.error(err);
       } else {
@@ -56,6 +58,12 @@ class CalendarComponent extends React.Component {
   showMyCalendarHandler() {
     const { getUserInfo } = this.props;
     getUserInfo();
+  }
+
+  showFreeTime() {
+    const { app } = this.props;
+    const { events, user } = app.state;
+    this.setState({prevEvents: events}, app.setState({events: convertEvents(user.freetime)}))
   }
 
   updateAvailability() {

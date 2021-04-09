@@ -5,7 +5,7 @@ const convertEvents = (array) => {
   const events = array.map((obj, index) => {
     const event = {
       id: index + 1,
-      title: obj.event_name,
+      title: obj.event_name || 'Free Time',
       start: new Date(obj.start_time),
       end: new Date(obj.end_time),
     };
