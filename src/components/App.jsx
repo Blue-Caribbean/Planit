@@ -21,6 +21,8 @@ class App extends React.Component {
       events: [],
       signup: false,
       loggedIn: false,
+      addEventsForGroupClicked: false,
+      clickedGrouptoAddEventsTo: '',
       eventsShowing: [
         {
           id: 0,
@@ -31,6 +33,7 @@ class App extends React.Component {
       ],
     };
     this.getUserInfo = this.getUserInfo.bind(this);
+    this.addEventsToGroup = this.addEventsToGroup.bind(this);
   }
 
   getUserInfo() {
@@ -39,6 +42,13 @@ class App extends React.Component {
       this.setState({
         eventsShowing: data,
       });
+    });
+  }
+
+  addEventsToGroup(groupID) {
+    this.setState({
+      addEventsForGroupClicked: true,
+      clickedGrouptoAddEventsTo: groupID,
     });
   }
 
@@ -63,8 +73,9 @@ class App extends React.Component {
           getUserInfo={this.getUserInfo}
           userId={user.id}
         />
-        <Sidebar />
+        <Sidebar userID={user.id} />
         <EventsUpcoming userId={userId} events={events} />
+        <Sidebar />
       </div>
     );
   }

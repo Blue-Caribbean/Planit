@@ -262,6 +262,9 @@ const deleteFriend = (userID, friendID, cb) => {
   });
 };
 
+/*
+  SELECT first, last FROM users INNER JOIN (SELECT friend_id FROM users INNER JOIN friends ON users.id = friends.user_id WHERE users.id = 4) AS con ON users.id = con.friend_id;
+*/
 const getFriends = (userID, cb) => {
   const sql = `SELECT first, last, id, email FROM users INNER JOIN (SELECT friend_id FROM users INNER JOIN friends ON users.id = friends.user_id WHERE users.id = ${userID}) AS con ON users.id = con.friend_id;`;
   pg.pool.query(sql, (err, data) => {

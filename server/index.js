@@ -157,7 +157,7 @@ app.post('/api/:userid/addtogroup', (req, res) => {
 app.get('/api/:userid/friends', (req, res) => {
   queries.getFriends(req.params.userid, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.status(400).send(null);
     } else {
       res.status(201).send(data);
     }

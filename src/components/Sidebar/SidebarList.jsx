@@ -27,8 +27,8 @@ class SidebarList extends React.Component {
         <div className="sidebarList">
           <ul>
             {friends.map((friend, index) => (
-              <li key={friend} onClick={this.handleClick}>
-                {friend}
+              <li key={friend.first} onClick={this.handleClick}>
+                {friend.first} {friend.last}
               </li>
             ))}
           </ul>
@@ -45,8 +45,8 @@ class SidebarList extends React.Component {
     return (
       <div className="sidebarList">
         {groups.map((group, index) => (
-          <div key={group} onClick={this.handleClick} name={index}>
-            {group}
+          <div key={group.group_id} onClick={this.handleClick} name={index}>
+            {group.group_name}
           </div>
         ))}
         <AddFriendsToGroup group={groups[clickedIndex]} clicked={clicked} friends={friends} />

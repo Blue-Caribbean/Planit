@@ -17,18 +17,26 @@ const createUser = (paramObj, callback) => {
   .catch((err) => {callback(err)})
 };
 
-const getFriends = (userId) => {
+const getFriends = (userId, callback) => {
   //give me the user Id
   axios({
     url: `/api/${userId}/friends`,
     method: 'get'
+  }).then((data) => {
+    callback(null, data.data.rows);
+  }).catch((err) => {
+    callback(err, null);
   })
 }
 
-const getGroups = (userId) => {
+const getGroups = (userId, callback) => {
   axios({
     url: `/api/${userId}/groups`,
     method: 'get'
+  }).then((data) => {
+    callback(null, data.data.rows);
+  }).catch((err) => {
+    callback(err, null);
   })
 }
 

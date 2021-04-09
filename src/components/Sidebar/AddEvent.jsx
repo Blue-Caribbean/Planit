@@ -5,6 +5,12 @@ class AddEvent extends React.Component {
     super(props);
   }
 
+  /*
+    OnClick function: Sends the clicked group's userID to the calendar modal
+
+    1. We could set the clicked group in app's state
+    2. We could also just set the group in lerroy's state.
+  */
   render() {
     const { clicked } = this.props;
     if (clicked === '') {
