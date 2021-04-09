@@ -8,9 +8,9 @@ const convertEvents = (array) => {
       end: new Date(obj.end_time),
     };
     return event;
-  })
+  });
   return events;
-}
+};
 
 const convertFreeTime = (array) => {
   const freetime = array.map((obj, index) => {

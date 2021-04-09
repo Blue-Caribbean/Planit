@@ -67,9 +67,9 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
-        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} user={user} userId={user.id} />
+        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} user={user} userId={id} />
         <Sidebar />
-        <EventsUpcoming userId={id} />
+        <EventsUpcoming userId={id} event={events}/>
       </div>
     );
   }
