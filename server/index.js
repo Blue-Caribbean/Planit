@@ -11,9 +11,9 @@ app.get('/api/:groupid/groupfreetime', (req, res) => {
   // Returns an array of freetime objects for all users in the group.
   queries.getGroupFreeTime(req.params.groupid, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     }
   });
 });
@@ -21,9 +21,9 @@ app.get('/api/:groupid/groupfreetime', (req, res) => {
 app.post('/api/searchfriends', (req, res) => {
   queries.searchFriends(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     }
   });
 });
@@ -35,9 +35,9 @@ app.post('/api/auth', (req, res) => {
   // if the user doesn't exist handle on the frontend.
   queries.checkUser(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(401).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(201).send(result);
     }
   });
 });
@@ -57,29 +57,29 @@ app.post('/api/createuser', (req, res) => {
 */
   queries.createUser(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(result);
+      res.sendStatus(404).send(result);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(201).send(result);
     }
   });
 });
 app.post('/api/:userid/creategroup', (req, res) => {
-  queries.createGroupByUserId(req.params.userid, req.body, (err, results)=>{
+  queries.createGroupByUserId(req.params.userid, req.body, (err, results) => {
     if (err) {
-      res.status(400).send(err)
-    } else{
-      res.status(200).send(results)
+      res.sendStatus(400).send(err);
+    } else {
+      res.sendStatus(200).send(results);
     }
-  })
-})
+  });
+});
 app.put('/api/:userid/updatefreetime', (req, res) => {
   // user_id to select, and clear all existing free time relating to that user.
   // then insert the new freetime.
   queries.updateFreeTime(req.params.userid, req.body.freeTime, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     }
   });
 });
@@ -89,9 +89,9 @@ app.post('/api/:userid/addfriend', (req, res) => {
   // double post to db.
   queries.addFriend(req.params.userid, req.body.friend_id, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(204).send(data);
+      res.sendStatus(204).send(data);
     }
   });
 });
@@ -101,9 +101,9 @@ app.delete('/api/:userid/deletefriend', (req, res) => {
   // another double query.
   queries.deleteFriend(req.params.userid, req.body.friend_id, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(202).send(data);
+      res.sendStatus(202).send(data);
     }
   });
 });
@@ -113,9 +113,9 @@ app.post('/api/searchfriends', (req, res) => {
   // returns list of names which comes along with id.
   queries.searchFriends(req.body, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(201).send(data);
+      res.sendStatus(201).send(data);
     }
   });
 });
@@ -123,9 +123,9 @@ app.post('/api/searchfriends', (req, res) => {
 app.get('/api/:userid/groups', (req, res) => {
   queries.getGroupsById(req.params.userid, (err, results) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(results);
+      res.sendStatus(200).send(results);
     }
   });
 });
@@ -133,9 +133,9 @@ app.get('/api/:userid/groups', (req, res) => {
 app.post('/api/groups', (req, res) => {
   queries.getAllGroups(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     }
   });
 });
@@ -145,9 +145,9 @@ app.post('/api/:userid/addtogroup', (req, res) => {
   // adds that user to usertogroup join.
   queries.addToGroup(req.params.userid, req.body.group_id, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     }
   });
 });
@@ -155,9 +155,9 @@ app.post('/api/:userid/addtogroup', (req, res) => {
 app.get('/api/:userid/friends', (req, res) => {
   queries.getFriends(req.params.userid, (err, data) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(201).send(data);
+      res.sendStatus(201).send(data);
     }
   });
 });
@@ -166,20 +166,19 @@ app.get('/api/:userid/userevents', (req, res) => {
   // actually not so bad.
   queries.getUserEvents(req.params.userid, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     }
   });
 });
 
 app.post('/api/:groupid/event', (req, res) => {
-
   queries.createEventByGroupId(req.params.groupid, req.body, (err, results) => {
     if (err) {
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     } else {
-      res.status(200).send(results);
+      res.sendStatus(200).send(results);
     }
   });
 });
