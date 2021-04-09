@@ -4,12 +4,21 @@ import Signup from './intro/Signup';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
+import requests from '../../functions/requests';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 4,
+      user: {
+        first: null,
+        last: null,
+        email: null,
+        userId: null,
+        profilepic: null,
+        freetime: [],
+      },
+      events: [],
       signup: false,
       loggedIn: false,
       addEventsForGroupClicked: false,
@@ -28,18 +37,8 @@ class App extends React.Component {
   }
 
   getUserInfo() {
-    // make get request with username in state
-    // sets state with the events returned
-    this.setState({
-      eventsShowing: [
-        {
-          id: 0,
-          title: 'Example Event (Example Group)',
-          start: new Date(2021, 3, 0, 3, 20, 0),
-          end: new Date(2021, 3, 0, 3, 45, 0),
-        },
-      ],
-    });
+    const { userId } = this.state;
+    requests.getUserEvents(this, userId);
   }
 
   addEventsToGroup(groupID) {
@@ -51,13 +50,19 @@ class App extends React.Component {
 
   render() {
     const app = this;
-    const { userId, eventsShowing, loggedIn, signup } = this.state;
+    const { user, eventsShowing, events, loggedIn, signup } = this.state;
+    const { userId } = user;
     if (!loggedIn) {
       return <div id="app">{signup ? <Signup app={app} /> : <Login app={app} />}</div>;
     }
     return (
       <div id="appjsx">
-        <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} />
+        <CalendarComponent
+          app={app}
+          events={eventsShowing}
+          getUserInfo={this.getUserInfo}
+          userId={userId}
+        />
         <Sidebar userID={userId} />
         <EventsUpcoming userId={userId} />
       </div>

@@ -29,6 +29,7 @@ app.post('/api/searchfriends', (req, res) => {
 });
 
 app.post('/api/auth', (req, res) => {
+  console.log(req.body);
   // Check for user in db, if no user create new user.
   // send back id if user exists.
   // if the user doesn't exist handle on the frontend.
@@ -62,7 +63,15 @@ app.post('/api/createuser', (req, res) => {
     }
   });
 });
-
+app.post('/api/:userid/creategroup', (req, res) => {
+  queries.createGroupByUserId(req.params.userid, req.body, (err, results)=>{
+    if (err) {
+      res.status(400).send(err)
+    } else{
+      res.status(200).send(results)
+    }
+  })
+})
 app.put('/api/:userid/updatefreetime', (req, res) => {
   // user_id to select, and clear all existing free time relating to that user.
   // then insert the new freetime.
@@ -112,8 +121,6 @@ app.post('/api/searchfriends', (req, res) => {
 });
 
 app.get('/api/:userid/groups', (req, res) => {
-  //austin
-  // get all groups for this user id and return them.
   queries.getGroupsById(req.params.userid, (err, results) => {
     if (err) {
       res.status(400).send(err);
@@ -157,7 +164,7 @@ app.get('/api/:userid/friends', (req, res) => {
 
 app.get('/api/:userid/userevents', (req, res) => {
   // actually not so bad.
-  queries.getUserEvents(req.params.id, (err, result) => {
+  queries.getUserEvents(req.params.userid, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -167,8 +174,6 @@ app.get('/api/:userid/userevents', (req, res) => {
 });
 
 app.post('/api/:groupid/event', (req, res) => {
-  //Austin
-  //insert the event -> pull the user ids from the group id -> each user Id insert new users to events
 
   queries.createEventByGroupId(req.params.groupid, req.body, (err, results) => {
     if (err) {

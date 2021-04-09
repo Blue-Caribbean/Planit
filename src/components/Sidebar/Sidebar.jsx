@@ -1,6 +1,7 @@
 import React from 'react';
 import SidebarList from './SidebarList';
 import PlusButton from './PlusButton';
+import requests from '../../../functions/requests';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
