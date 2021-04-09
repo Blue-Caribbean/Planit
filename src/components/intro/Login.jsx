@@ -7,7 +7,7 @@ class Login extends React.Component {
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.handleSignup.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 

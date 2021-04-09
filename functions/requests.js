@@ -11,9 +11,8 @@ const login = (app, paramObj, callback) => {
 };
 
 const createUser = (app, paramObj, callback) => {
-  axios.post('/api/createuser', {
-    user: paramObj
-  })
+  debugger;
+  axios.post('/api/createuser', paramObj)
   .then(callback(null))
   .catch((err) => {callback(err)})
 };
