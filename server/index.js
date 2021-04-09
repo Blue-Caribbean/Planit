@@ -7,6 +7,17 @@ const port = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+app.get('/api/:groupid/groupfreetime', (req, res) => {
+  // Returns an array of freetime objects for all users in the group.
+  queries.getGroupFreeTime(req.params.groupid, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
 app.post('/api/searchfriends', (req, res) => {
   queries.searchFriends(req.body, (err, result) => {
     if (err) {
@@ -18,14 +29,15 @@ app.post('/api/searchfriends', (req, res) => {
 });
 
 app.post('/api/auth', (req, res) => {
+  console.log(req.body);
   // Check for user in db, if no user create new user.
   // send back id if user exists.
   // if the user doesn't exist handle on the frontend.
   queries.checkUser(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(err);
+      res.status(401).send(err);
     } else {
-      res.status(200).send(result);
+      res.status(201).send(result);
     }
   });
 });
@@ -45,9 +57,18 @@ app.post('/api/createuser', (req, res) => {
 */
   queries.createUser(req.body, (err, result) => {
     if (err) {
-      res.status(400).send(result);
+      res.status(400).send(err);
     } else {
-      res.status(200).send(result);
+      res.status(200).send(result.toString());
+    }
+  });
+});
+app.post('/api/:userid/creategroup', (req, res) => {
+  queries.createGroupByUserId(req.params.userid, req.body, (err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results);
     }
   });
 });
@@ -55,7 +76,8 @@ app.post('/api/createuser', (req, res) => {
 app.put('/api/:userid/updatefreetime', (req, res) => {
   // user_id to select, and clear all existing free time relating to that user.
   // then insert the new freetime.
-  queries.updateFreeTime(req.params.userid, req.body.freeTime, (err, result) => {
+
+  queries.updateFreeTime(req.params.userid, req.body, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -101,8 +123,6 @@ app.post('/api/searchfriends', (req, res) => {
 });
 
 app.get('/api/:userid/groups', (req, res) => {
-  //austin
-  // get all groups for this user id and return them.
   queries.getGroupsById(req.params.userid, (err, results) => {
     if (err) {
       res.status(400).send(err);
@@ -146,7 +166,7 @@ app.get('/api/:userid/friends', (req, res) => {
 
 app.get('/api/:userid/userevents', (req, res) => {
   // actually not so bad.
-  queries.getUserEvents(req.params.id, (err, result) => {
+  queries.getUserEvents(req.params.userid, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -156,9 +176,6 @@ app.get('/api/:userid/userevents', (req, res) => {
 });
 
 app.post('/api/:groupid/event', (req, res) => {
-  //Austin
-  //insert the event -> pull the user ids from the group id -> each user Id insert new users to events
-
   queries.createEventByGroupId(req.params.groupid, req.body, (err, results) => {
     if (err) {
       res.status(400).send(err);

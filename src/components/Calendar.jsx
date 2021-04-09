@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
+import requests from '../../functions/requests';
 
 const localizer = momentLocalizer(moment);
 
@@ -30,7 +31,8 @@ class CalendarComponent extends React.Component {
   }
 
   onSubmit() {
-    // post request /api/:user_id/updatefreetime paramsObj = [array of events]
+    const { events, userId } = this.props;
+    requests.updateFreeTime(userId, events);
     this.setState({ canEdit: false });
   }
 
@@ -66,19 +68,30 @@ class CalendarComponent extends React.Component {
     const { canEdit } = this.state;
     return (
       <>
-        <h1>Planit</h1>
-        <h4 onClick={this.showMyCalendarHandler}>Show My Calendar</h4>
-        <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
-        {canEdit ? (
-          <>
-            <button type="submit" onClick={this.onCancel}>
-              Cancel
-            </button>
-            <button type="submit" onClick={this.onSubmit}>
-              Submit
-            </button>
-          </>
-        ) : null}
+        <div className="navbar">
+          <div className="navbar-logo-div">
+            <img src="globe.png" alt="planitlogo" className="logo" /> <h1>Planit</h1>
+          </div>
+          <div className="navbar-show-calendar">
+            <h4 onClick={this.showMyCalendarHandler}>Show My Calendar</h4>
+          </div>
+          <div className="navbar-edit-calendar">
+            <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
+          </div>
+
+          <div className="navbar-edit-avail">
+            {canEdit ? (
+              <>
+                <button type="submit" onClick={this.onCancel}>
+                  Cancel
+                </button>
+                <button type="submit" onClick={this.onSubmit}>
+                  Submit
+                </button>
+              </>
+            ) : null}
+          </div>
+        </div>
         <Calendar
           selectable={canEdit}
           localizer={localizer}

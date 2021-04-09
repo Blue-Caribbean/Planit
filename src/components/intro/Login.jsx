@@ -1,5 +1,6 @@
 import React from 'react';
-import { login } from '../../../requests/requests';
+import { login, getUserEvents } from '../../../functions/requests';
+import { convertEvents } from '../../../functions/helpers';
 
 class Login extends React.Component {
   constructor() {
@@ -7,7 +8,7 @@ class Login extends React.Component {
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.handleSignup.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -16,7 +17,6 @@ class Login extends React.Component {
     const val = event.target.value;
     this.setState({ [key]: val });
   }
-
 
   handleSubmit(event) {
     event.preventDefault();
@@ -27,34 +27,71 @@ class Login extends React.Component {
 
   handleSignup() {
     const { app } = this.props;
-    app.setState({signup: true});
+    app.setState({ signup: true });
   }
 
   handleLogin(event) {
-    event.preventDefault()
+    event.preventDefault();
     const { app } = this.props;
     const { email } = this.state;
-    const paramObj = {email};
-    login(app, paramObj, (err, result) => {
-      if (err) {
-        console.error(err)
+    const paramObj = { email };
+    login(paramObj, (err, result) => {
+      if (err || !result) {
+        console.error('user not found');
       } else {
-        app.setState({user: result, loggedIn: true }, () => {console.log(app.state)})
+        getUserEvents(result.id, (err, events) => {
+          if (err) {
+            console.error(err);
+          } else {
+            app.setState({ user: result, loggedIn: true, events: convertEvents(events) }, () => {
+              console.log(app.state);
+            });
+          }
+        });
       }
     });
   }
 
   render() {
     return (
-      <label>
-        Create an Account
-        <form onSubmit={this.handleSubmit}>
-          <input id='email' type='email' pattern='[^@\s]+@[^@\s]+' title='Invalid email address' placeholder="example@email.com" required onChange={this.handleChange} />
-          <input id='password' type='password' placeholder='password' required onChange={this.handleChange} />
-          <button type='submit'>Login</button>
-          <button type='button' onClick={this.handleSignup} >Signup</button>
-        </form>
-      </label>
+      <div className="login-div">
+        <label>
+          <h3>Sign In or Create an Account</h3>
+          <hr />
+          <form onSubmit={this.handleLogin}>
+            <div className="form-email">
+              {'E-Mail: '}
+              <input
+                id="email"
+                type="email"
+                pattern="[^@\s]+@[^@\s]+"
+                title="Invalid email address"
+                placeholder="example@email.com"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-password">
+              {'Password: '}
+              <input
+                id="password"
+                type="password"
+                placeholder="password"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-buttons-div">
+              <button className="form-button" type="submit">
+                Login
+              </button>
+              <button className="form-button" type="button" onClick={this.handleSignup}>
+                Signup
+              </button>
+            </div>
+          </form>
+        </label>
+      </div>
     );
   }
 }

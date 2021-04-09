@@ -1,4 +1,4 @@
-# blue-ocean
+# Planit!
 
 We're team Carribbean, and we're comprised of:
 
