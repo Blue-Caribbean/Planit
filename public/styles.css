@@ -128,3 +128,13 @@ events upcoming
   grid-row: 3;
   grid-column: 1/5;
 }
+
+#eventTile {
+  width: 200px;
+}
+
+.eventsTiles {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+}
