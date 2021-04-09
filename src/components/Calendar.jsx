@@ -25,24 +25,25 @@ class CalendarComponent extends React.Component {
     this.setState(
       { canEdit: false },
       app.setState({
-        eventsShowing: prevEvents,
+        events: prevEvents,
       })
     );
   }
 
   onSubmit() {
-    const { events, userId } = this.props;
+    const { events, userId, app } = this.props;
+    const { prevEvents } = this.state;
     requests.updateFreeTime(userId, events);
-    this.setState({ canEdit: false });
+    app.setState({ events: prevEvents}, this.setState({ canEdit: false }))
   }
 
   onChange({ start, end }) {
     const { app } = this.props;
-    const { eventsShowing } = app.state;
-    const tempArr = eventsShowing.slice();
+    const { events } = app.state;
+    const tempArr = events.slice();
     tempArr.push({ start, end, title: 'Free Time' });
     app.setState({
-      eventsShowing: tempArr,
+      events: tempArr,
     });
   }
 
@@ -53,13 +54,13 @@ class CalendarComponent extends React.Component {
 
   updateAvailability() {
     const { app } = this.props;
-    const { eventsShowing } = app.state;
+    const { events } = app.state;
     this.setState(
       {
-        prevEvents: eventsShowing,
+        prevEvents: events,
         canEdit: true,
       },
-      app.setState({ eventsShowing: [] })
+      app.setState({ events: [] })
     );
   }
 

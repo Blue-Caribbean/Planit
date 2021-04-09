@@ -33,7 +33,7 @@ const getGroups = (userId) => {
 }
 
 const updateFreeTime = (userId, freeTime) => {
-  axios.put(`/api/${userId}/updatefreetime`, {freeTime})
+  axios.put(`/api/${userId}/updatefreetime`, freeTime)
     .then(() => {
       console.log('done')
     })
