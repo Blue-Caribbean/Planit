@@ -18,8 +18,23 @@ const createUser = (app, paramObj, callback) => {
   .catch((err) => {callback(err)})
 };
 
-const updateFreeTime = (userId, freeTimeObj) => {
-  axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
+const getFriends = (userId) => {
+  //give me the user Id
+  axios({
+    url: `/api/${userId}/friends`,
+    method: 'get'
+  })
+}
+
+const getGroups = (userId) => {
+  axios({
+    url: `/api/${userId}/groups`,
+    method: 'get'
+  })
+}
+
+const updateFreeTime = (userId, freeTime) => {
+  axios.put(`/api/${userId}/updatefreetime`, {freeTime})
     .then(() => {
       console.log('done')
     })
@@ -29,6 +44,7 @@ const updateFreeTime = (userId, freeTimeObj) => {
 };
 
 const createGroup = (userId, groupObj) => {
+  //give user id and group obj formatted like the group schema
   axios({
     method: 'post',
     url: `/api/${userid}/creategroup`,
@@ -50,10 +66,19 @@ const getUserEvents = (app, userid, callback) => {
   })
 };
 
+const createGroupEvent = (app, groupid, eventsObj, callback) => {
+  axios.post(`/api/${groupid}/event`, eventsObj)
+  .then(callback(null))
+  .catch((err) => {callback(err)})
+};
+
 module.exports = {
   getUserEvents,
   updateFreeTime,
   createUser,
   login,
   createGroup,
+  getFriends,
+  getGroups,
+  createGroupEvent,
 }

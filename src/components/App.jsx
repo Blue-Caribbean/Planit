@@ -35,8 +35,12 @@ class App extends React.Component {
   }
 
   getUserInfo() {
-    const { userId } = this.state;
-    requests.getUserEvents(this, userId);
+    const { user } = this.state;
+    requests.getUserEvents(this, user.id, (err, data) => {
+      this.setState({
+        eventsShowing: data,
+      })
+    });
   }
 
   render() {
@@ -54,7 +58,7 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
-        <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} userId={userId} />
+        <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} userId={user.id} />
         <Sidebar />
         <EventsUpcoming userId={userId} />
       </div>
