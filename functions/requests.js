@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const login = (app, paramObj, callback) => {
+const login = (paramObj, callback) => {
   axios.post('/api/auth', paramObj)
     .then((data) => {
       callback(null, data.data);
@@ -10,10 +10,9 @@ const login = (app, paramObj, callback) => {
     })
 };
 
-const createUser = (app, paramObj, callback) => {
-  axios.post('/api/createuser', {
-    user: paramObj
-  })
+const createUser = (paramObj, callback) => {
+  debugger;
+  axios.post('/api/createuser', paramObj)
   .then(callback(null))
   .catch((err) => {callback(err)})
 };
@@ -53,7 +52,7 @@ const createGroup = (userId, groupObj) => {
 }
 
 
-const getUserEvents = (app, userid, callback) => {
+const getUserEvents = (userid, callback) => {
   axios({
     method: 'get',
     url: `/api/${userid}/userevents`,
