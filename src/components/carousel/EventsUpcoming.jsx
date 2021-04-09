@@ -141,6 +141,7 @@ class EventsUpcoming extends React.Component {
       // rsvpResponse: null,
       eventsOfNineOnPanelNumber: 0,
     };
+
     // this.getUsersToEventsEventGroupsData = this.getUsersToEventsEventGroupsData.bind(this);
     this.sortEventsUpcomingCollectionByDate = this.sortEventsUpcomingCollectionByDate.bind(this);
     // this.manageRsvpClickEvent = this.manageRsvpClickEvent.bind(this);
@@ -278,7 +279,7 @@ class EventsUpcoming extends React.Component {
                 <div key={event.event_id} id="eventTile">
                   {/* <li key={event.event_id} id="eventTile"> */}
                   <span id="tileDateBox">
-                    {`${moment(event.start_time).format('MMM')} ${event.start_time.slice(8, 10)}`}
+                    {`${moment(event.start).format('MMM')} ${event.start_time.slice(8, 10)}`}
                     {/* <br></br>
                       {`${moment(event.start_time).format('MMM')}`} */}
                     {/* <br></br> */}
