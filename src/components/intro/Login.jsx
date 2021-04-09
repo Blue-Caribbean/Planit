@@ -43,7 +43,7 @@ class Login extends React.Component {
           if (err) {
             console.error(err);
           } else {
-            app.setState({ user: result, loggedIn: true, events: events }, () => {
+            app.setState({ user: result, loggedIn: true, events }, () => {
               console.log(app.state);
             });
           }
