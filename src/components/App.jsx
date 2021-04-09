@@ -55,7 +55,7 @@ class App extends React.Component {
   render() {
     const app = this;
     const { user, eventsShowing, events, loggedIn, signup } = this.state;
-    const { userId } = user;
+    //const { userId } = user;
     if (!loggedIn) {
       return (
         <div className="login-outer-div">
@@ -74,8 +74,7 @@ class App extends React.Component {
           userId={user.id}
         />
         <Sidebar userID={user.id} />
-        <EventsUpcoming userId={userId} events={events} />
-        <Sidebar />
+        <EventsUpcoming userId={user.id} events={events} />
       </div>
     );
   }
