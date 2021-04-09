@@ -26,7 +26,7 @@ class Signup extends React.Component {
 
   signup(event) {
     event.preventDefault();
-    const app = this.props;
+    const { app } = this.props;
     const {email, first, last} = this.state;
     const paramObj = {
       email,
