@@ -7,10 +7,8 @@ class Sidebar extends React.Component {
     super(props);
 
     this.state = {
-      dummy: {
-        friends: ['Charlie', 'John', 'Ted', 'Joe', 'HoneyBooBoo'],
-        groups: ['Galactus Maximus', 'Fathers who Fart', 'Fidget Spinners Anonomous', 'Wall-Mart'],
-      },
+      friends: ['Charlie', 'John', 'Ted', 'Joe', 'HoneyBooBoo'],
+      groups: ['Galactus Maximus', 'Fathers who Fart', 'Fidget Spinners Anonomous', 'Wall-Mart'],
       groupsSelected: true,
       searchTerm: '',
     };
@@ -30,6 +28,7 @@ class Sidebar extends React.Component {
       if (err) {
         console.log(err);
       } else {
+        console.log('settingState');
         this.setState({
           groups: result,
         });
@@ -72,9 +71,10 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { dummy, groupsSelected, searchTerm } = this.state;
+    const { groups, friends, groupsSelected, searchTerm } = this.state;
     let friendsColor = 'red';
     let groupsColor = 'white';
+    console.log(groups);
     if (groupsSelected === true) {
       friendsColor = 'white';
       groupsColor = 'red';
@@ -93,16 +93,8 @@ class Sidebar extends React.Component {
         >
           Friends
         </button>
-        <PlusButton
-          friends={dummy.friends}
-          groups={dummy.groups}
-          isGroupsSelected={groupsSelected}
-        />
-        <SidebarList
-          friends={dummy.friends}
-          groups={dummy.groups}
-          isGroupsSelected={groupsSelected}
-        />
+        <PlusButton friends={friends} groups={groups} isGroupsSelected={groupsSelected} />
+        <SidebarList friends={friends} groups={groups} isGroupsSelected={groupsSelected} />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const login = (app, paramObj, callback) => {
+const login = (paramObj, callback) => {
   axios.post('/api/auth', paramObj)
     .then((data) => {
       callback(null, data.data);
@@ -10,10 +10,9 @@ const login = (app, paramObj, callback) => {
     })
 };
 
-const createUser = (app, paramObj, callback) => {
-  axios.post('/api/createuser', {
-    user: paramObj
-  })
+const createUser = (paramObj, callback) => {
+  debugger;
+  axios.post('/api/createuser', paramObj)
   .then(callback(null))
   .catch((err) => {callback(err)})
 };
@@ -24,7 +23,7 @@ const getFriends = (userId, callback) => {
     url: `/api/${userId}/friends`,
     method: 'get'
   }).then((data) => {
-    callback(null, data.data);
+    callback(null, data.data.rows);
   }).catch((err) => {
     callback(err, null);
   })
@@ -35,14 +34,14 @@ const getGroups = (userId, callback) => {
     url: `/api/${userId}/groups`,
     method: 'get'
   }).then((data) => {
-    callback(null, data.data);
+    callback(null, data.data.rows);
   }).catch((err) => {
     callback(err, null);
   })
 }
 
-const updateFreeTime = (userId, freeTimeObj) => {
-  axios.put(`/api/${userId}/updatefreetime`, freeTimeObj)
+const updateFreeTime = (userId, freeTime) => {
+  axios.put(`/api/${userId}/updatefreetime`, {freeTime})
     .then(() => {
       console.log('done')
     })
@@ -61,7 +60,7 @@ const createGroup = (userId, groupObj) => {
 }
 
 
-const getUserEvents = (app, userid, callback) => {
+const getUserEvents = (userid, callback) => {
   axios({
     method: 'get',
     url: `/api/${userid}/userevents`,
@@ -74,6 +73,12 @@ const getUserEvents = (app, userid, callback) => {
   })
 };
 
+const createGroupEvent = (app, groupid, eventsObj, callback) => {
+  axios.post(`/api/${groupid}/event`, eventsObj)
+  .then(callback(null))
+  .catch((err) => {callback(err)})
+};
+
 module.exports = {
   getUserEvents,
   updateFreeTime,
@@ -82,4 +87,5 @@ module.exports = {
   createGroup,
   getFriends,
   getGroups,
+  createGroupEvent,
 }

@@ -37,8 +37,12 @@ class App extends React.Component {
   }
 
   getUserInfo() {
-    const { userId } = this.state;
-    requests.getUserEvents(this, userId);
+    const { user } = this.state;
+    requests.getUserEvents(this, user.id, (err, data) => {
+      this.setState({
+        eventsShowing: data,
+      });
+    });
   }
 
   addEventsToGroup(groupID) {
@@ -51,7 +55,6 @@ class App extends React.Component {
   render() {
     const app = this;
     const { user, eventsShowing, events, loggedIn, signup } = this.state;
-    const { userId } = user;
     if (!loggedIn) {
       return (
         <div className="login-outer-div">
@@ -65,12 +68,12 @@ class App extends React.Component {
       <div id="appjsx">
         <CalendarComponent
           app={app}
-          events={eventsShowing}
+          events={events}
           getUserInfo={this.getUserInfo}
-          userId={userId}
+          userId={user.id}
         />
-        <Sidebar userID={userId} />
-        <EventsUpcoming userId={userId} />
+        <Sidebar userID={user.id} />
+        <EventsUpcoming userId={user.id} />
       </div>
     );
   }

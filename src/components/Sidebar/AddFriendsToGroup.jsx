@@ -34,6 +34,10 @@ class AddFriendsToGroup extends React.Component {
 
     const { newMembers } = this.state;
 
+    console.log(event.target.key);
+
+    console.log(event.target.innerHTML);
+
     let temp = newMembers;
     temp.push(event.target.innerHTML);
 
@@ -65,13 +69,16 @@ class AddFriendsToGroup extends React.Component {
       });
     }
     if (
-      friends.filter((friend) => friend.toLowerCase().includes(searchBarTerm.toLowerCase()))
-        .length === 1
+      friends.filter((friend) =>
+        `${friend.first} ${friend.last}`.toLowerCase().includes(searchBarTerm.toLowerCase())
+      ).length === 1
     ) {
       console.log('Aliens');
       let temp = newMembers;
       temp.push(
-        friends.filter((friend) => friend.toLowerCase().includes(searchBarTerm.toLowerCase()))[0]
+        friends.filter((friend) =>
+          `${friend.first} ${friend.last}`.toLowerCase().includes(searchBarTerm.toLowerCase())
+        )[0]
       );
       this.setState({
         invalidBruh: false,
@@ -111,10 +118,14 @@ class AddFriendsToGroup extends React.Component {
           <div className="searchBarList">
             <ul>
               {friends
-                .filter((friend) => friend.toLowerCase().includes(searchBarTerm.toLowerCase()))
+                .filter((friend) =>
+                  `${friend.first} ${friend.last}`
+                    .toLowerCase()
+                    .includes(searchBarTerm.toLowerCase())
+                )
                 .map((friend, index) => (
                   <li key={index} onClick={this.handleListClick}>
-                    {friend}
+                    {friend.first} {friend.last}
                   </li>
                 ))}
             </ul>
