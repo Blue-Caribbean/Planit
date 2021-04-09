@@ -1,4 +1,3 @@
-
 const mRange = require('moment-range');
 const Moment = require('moment');
 const pg = require('./index.js');
@@ -124,11 +123,11 @@ const updateFreeTime = (userId, freeTimeArray, cb) => {
           'INSERT INTO freetime (user_id, start, end_time) VALUES ($1, $2, $3)',
           [userId, obj.start, obj.end],
           (error, result) => {
-            if (error) {
-              cb(error, null);
-            } else {
-              cb(null, result);
-            }
+            // if (error) {
+            //   cb(error, null);
+            // } else {
+            //   cb(null, result);
+            // }
           }
         );
       });
