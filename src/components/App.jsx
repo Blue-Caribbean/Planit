@@ -45,10 +45,12 @@ class App extends React.Component {
     const { userId } = user;
     if (!loggedIn) {
       return (
-        <div id='app'>
-          {signup ? <Signup app={app} /> : <Login app={app} /> }
+        <div className="login-outer-div">
+          <div id="app" className="login-signup">
+            {signup ? <Signup app={app} /> : <Login app={app} />}
+          </div>
         </div>
-      )
+      );
     }
     return (
       <div id="appjsx">
