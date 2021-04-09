@@ -33,8 +33,14 @@ class CalendarComponent extends React.Component {
   onSubmit() {
     const { events, userId, app } = this.props;
     const { prevEvents } = this.state;
-    requests.updateFreeTime(userId, events);
+    requests.updateFreeTime(userId, events, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+
     app.setState({ events: prevEvents}, this.setState({ canEdit: false }))
+      }
+    });
   }
 
   onChange({ start, end }) {

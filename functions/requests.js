@@ -32,13 +32,13 @@ const getGroups = (userId) => {
   })
 }
 
-const updateFreeTime = (userId, freeTime) => {
+const updateFreeTime = (userId, freeTime, callback) => {
   axios.put(`/api/${userId}/updatefreetime`, freeTime)
     .then(() => {
-      console.log('done')
+      callback(null);
     })
     .catch((err) => {
-      console.error(err);
+      callback(err);
     })
 };
 
