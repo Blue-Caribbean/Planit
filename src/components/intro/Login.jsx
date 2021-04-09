@@ -1,5 +1,6 @@
 import React from 'react';
 import { login, getUserEvents } from '../../../functions/requests';
+import { convertEvents } from '../../../functions/helpers';
 
 class Login extends React.Component {
   constructor() {
@@ -42,7 +43,7 @@ class Login extends React.Component {
           if (err) {
             console.error(err);
           } else {
-            app.setState({ user: result, loggedIn: true, events }, () => {
+            app.setState({ user: result, loggedIn: true, events: convertEvents(events) }, () => {
               console.log(app.state);
             });
           }

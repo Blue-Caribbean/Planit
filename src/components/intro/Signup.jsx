@@ -38,7 +38,6 @@ class Signup extends React.Component {
       if (err) {
         console.error(err);
       } else {
-        debugger;
         app.setState({signup: false});
       }
     })
