@@ -34,7 +34,7 @@ class Signup extends React.Component {
       last,
       profilepic: 'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
     }
-    createUser(app, paramObj, (err) => {
+    createUser( paramObj, (err) => {
       if (err) {
         console.error(err);
       } else {
