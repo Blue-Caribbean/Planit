@@ -10,10 +10,10 @@ const convertEvents = (array) => {
       end: new Date(obj.end_time),
     };
     return event;
-  })
+  });
   return events;
-}
+};
 
 module.exports = {
   convertEvents,
-}
+};
