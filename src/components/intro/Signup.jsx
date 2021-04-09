@@ -32,11 +32,13 @@ class Signup extends React.Component {
       email,
       first,
       last,
+      profilepic: 'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
     }
     createUser(app, paramObj, (err) => {
       if (err) {
         console.error(err);
       } else {
+        debugger;
         app.setState({signup: false});
       }
     })
@@ -52,7 +54,7 @@ class Signup extends React.Component {
           <input id='first' type='text' placeholder='First Name' onChange ={this.handleChange} required />
           <input id='last' type='text' placeholder="Last Name" onChange ={this.handleChange} required />
           <input id='password' type='password' onChange={this.handleChange} placeholder='Enter Password' required />
-          <button type='submit' on>Sign Up</button>
+          <button type='submit' >Sign Up</button>
           <button type='button' onClick={this.goBack}>Go Back</button>
         </form>
       </label>
