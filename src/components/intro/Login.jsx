@@ -1,5 +1,6 @@
 import React from 'react';
 import { login, getUserEvents } from '../../../functions/requests';
+import { convertEvents } from '../../../functions/helpers';
 
 class Login extends React.Component {
   constructor() {
@@ -7,7 +8,7 @@ class Login extends React.Component {
     this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.handleSignup.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -34,15 +35,15 @@ class Login extends React.Component {
     const { app } = this.props;
     const { email } = this.state;
     const paramObj = { email };
-    login(app, paramObj, (err, result) => {
+    login(paramObj, (err, result) => {
       if (err || !result) {
         console.error('user not found');
       } else {
-        getUserEvents(app, result.id, (err, events) => {
+        getUserEvents(result.id, (err, events) => {
           if (err) {
             console.error(err);
           } else {
-            app.setState({ user: result, loggedIn: true, events }, () => {
+            app.setState({ user: result, loggedIn: true, events: convertEvents(events) }, () => {
               console.log(app.state);
             });
           }
