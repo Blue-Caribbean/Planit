@@ -67,12 +67,18 @@ INSERT INTO user_to_group (user_id, group_id) VALUES (4, 9);
 
 
 -- Free time for user
-INSERT INTO freetime (user_id, start, end_time) VALUES(1,'2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z');
+INSERT INTO freetime (user_id, start, end_time) VALUES(1, '2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z');
 INSERT INTO freetime (user_id, start, end_time) VALUES(2, '2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z');
 --free time for jack
 INSERT INTO freetime (user_id, start, end_time) VALUES(4, '2021-04-09T23:35:18.415Z', '2021-04-10T05:32:43.824Z');
 INSERT INTO freetime (user_id, start, end_time) VALUES(4, '2021-04-10T23:35:18.415Z', '2021-04-11T05:32:43.824Z');
 INSERT INTO freetime (user_id, start, end_time) VALUES(4, '2021-04-11T23:35:18.415Z', '2021-04-12T05:32:43.824Z');
+
+INSERT INTO freetime (user_id, start, end_time) VALUES(2, '2021-04-09T23:35:18.415Z', '2021-04-10T05:32:43.824Z');
+INSERT INTO freetime (user_id, start, end_time) VALUES(2, '2021-04-10T23:35:18.415Z', '2021-04-11T05:32:43.824Z');
+
+INSERT INTO freetime (user_id, start, end_time) VALUES(1, '2021-04-09T23:35:18.415Z', '2021-04-10T05:32:43.824Z');
+INSERT INTO freetime (user_id, start, end_time) VALUES(1, '2021-04-11T23:35:18.415Z', '2021-04-12T05:32:43.824Z');
 
 -- create event
 INSERT INTO event (name, start_time, end_time, group_id) VALUES('riding a bicycle', '2021-04-06T23:35:18.415Z', '2021-04-07T05:32:43.824Z', 1);

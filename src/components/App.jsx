@@ -4,8 +4,7 @@ import Signup from './intro/Signup';
 import CalendarComponent from './Calendar';
 import Sidebar from './Sidebar/Sidebar';
 import EventsUpcoming from './carousel/EventsUpcoming';
-import requests from '../../functions/requests'
-
+import requests from '../../functions/requests';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +21,8 @@ class App extends React.Component {
       events: [],
       signup: false,
       loggedIn: false,
+      addEventsForGroupClicked: false,
+      clickedGrouptoAddEventsTo: '',
       eventsShowing: [
         {
           id: 0,
@@ -32,6 +33,7 @@ class App extends React.Component {
       ],
     };
     this.getUserInfo = this.getUserInfo.bind(this);
+    this.addEventsToGroup = this.addEventsToGroup.bind(this);
   }
 
   getUserInfo() {
@@ -39,7 +41,14 @@ class App extends React.Component {
     requests.getUserEvents(this, user.id, (err, data) => {
       this.setState({
         eventsShowing: data,
-      })
+      });
+    });
+  }
+
+  addEventsToGroup(groupID) {
+    this.setState({
+      addEventsForGroupClicked: true,
+      clickedGrouptoAddEventsTo: groupID,
     });
   }
 
@@ -58,7 +67,7 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
-        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} user={user} />
+        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} user={user} userId={user.id} />
         <Sidebar />
         <EventsUpcoming userId={id} />
       </div>
