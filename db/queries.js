@@ -101,7 +101,6 @@ const createUser = (userObj, cb) => {
     'INSERT INTO users(first, last, email, profilepic) VALUES ($1, $2, $3, $4) RETURNING id;',
     [first, last, email, profilepic],
     (err, result) => {
-      debugger;
       if (err) {
         cb(err, null);
       } else {
