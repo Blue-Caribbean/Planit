@@ -72,10 +72,12 @@ app.post('/api/:userid/creategroup', (req, res) => {
     }
   });
 });
+
 app.put('/api/:userid/updatefreetime', (req, res) => {
   // user_id to select, and clear all existing free time relating to that user.
   // then insert the new freetime.
-  queries.updateFreeTime(req.params.userid, req.body.freeTime, (err, result) => {
+
+  queries.updateFreeTime(req.params.userid, req.body, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {

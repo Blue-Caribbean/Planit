@@ -114,7 +114,7 @@ const createUser = (userObj, cb) => {
 
 const updateFreeTime = (userId, freeTimeArray, cb) => {
   // First remove all freetime for the user since this is an update.
-  pg.pool.query('DELETE * FROM freetime WHERE user_id=$1', [userId], (err) => {
+  pg.pool.query('DELETE FROM freetime WHERE user_id=$1', [userId], (err) => {
     if (err) {
       cb(err, null);
     } else {
