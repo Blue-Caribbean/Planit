@@ -14,7 +14,15 @@ class Sidebar extends React.Component {
       searchTerm: '',
     };
     this.handleToggle = this.handleToggle.bind(this);
+    this.updateGroups = this.updateGroups.bind(this);
+    this.updateFriends = this.updateFriends.bind(this);
   }
+
+  componentDidMount() {}
+
+  updateGroups() {}
+
+  updateFriends() {}
 
   handleToggle(event) {
     const { groupsSelected } = this.state;

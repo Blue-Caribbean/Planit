@@ -84,8 +84,16 @@ class PlusButton extends React.Component {
             <h2>Add Friends</h2>
             <h3>Click a Friend to Add</h3>
             <input type="text" placeholder="Search Friends" onChange={this.handleChange} />
-            <div className="searchBarList">
-              <ul>
+            <div className="searchBarList"></div>
+            <button>Search</button>
+            <button onClick={this.closeModal}>Close</button>
+          </Modal>
+        </div>
+      );
+    }
+
+    /*
+      <ul>
                 {friends
                   .filter((friend) => friend.toLowerCase().includes(searchBarTerm.toLowerCase()))
                   .map((friend, index) => (
@@ -94,13 +102,7 @@ class PlusButton extends React.Component {
                     </li>
                   ))}
               </ul>
-            </div>
-            <button>Add Friend</button>
-            <button onClick={this.closeModal}>Close</button>
-          </Modal>
-        </div>
-      );
-    }
+    */
     /*
       Add this button into the render method below if
       we want to schedule events directly from the sidebar
@@ -112,16 +114,9 @@ class PlusButton extends React.Component {
       <div id="modalDiv">
         <button onClick={this.openModal}>+</button>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
-          <h2>Search and select a group</h2>
+          <h2>Click to Join a Group</h2>
           <input type="text" placeholder="Search Groups" />
-          <div className="sidebarList">
-            {groups.map((group, index) => (
-              <div key={index} onClick={this.handleClick} name={group}>
-                {group}
-              </div>
-            ))}
-          </div>
-          <button>Add Group</button>
+          <button>Search</button>
           <h2>Create a New Group</h2>
           <div className="createGroup">
             <input type="text" placeholder="Group Name" />
@@ -133,6 +128,15 @@ class PlusButton extends React.Component {
     );
   }
 }
+/*
+  <div className="sidebarList">
+            {groups.map((group, index) => (
+              <div key={index} onClick={this.handleClick} name={group}>
+                {group}
+              </div>
+            ))}
+          </div>
+*/
 
 export default PlusButton;
 /*

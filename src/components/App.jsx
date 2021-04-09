@@ -12,6 +12,8 @@ class App extends React.Component {
       userId: 4,
       signup: false,
       loggedIn: false,
+      addEventsForGroupClicked: false,
+      clickedGrouptoAddEventsTo: '',
       eventsShowing: [
         {
           id: 0,
@@ -22,6 +24,7 @@ class App extends React.Component {
       ],
     };
     this.getUserInfo = this.getUserInfo.bind(this);
+    this.addEventsToGroup = this.addEventsToGroup.bind(this);
   }
 
   getUserInfo() {
@@ -39,20 +42,23 @@ class App extends React.Component {
     });
   }
 
+  addEventsToGroup(groupID) {
+    this.setState({
+      addEventsForGroupClicked: true,
+      clickedGrouptoAddEventsTo: groupID,
+    });
+  }
+
   render() {
     const app = this;
     const { userId, eventsShowing, loggedIn, signup } = this.state;
     if (!loggedIn) {
-      return (
-        <div id='app'>
-          {signup ? <Signup app={app} /> : <Login app={app} /> }
-        </div>
-      )
+      return <div id="app">{signup ? <Signup app={app} /> : <Login app={app} />}</div>;
     }
     return (
       <div id="appjsx">
         <CalendarComponent app={app} events={eventsShowing} getUserInfo={this.getUserInfo} />
-        <Sidebar />
+        <Sidebar userID={userId} />
         <EventsUpcoming userId={userId} />
       </div>
     );

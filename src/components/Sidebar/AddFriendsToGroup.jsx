@@ -44,6 +44,13 @@ class AddFriendsToGroup extends React.Component {
     });
   }
 
+  AddAllFriends(event) {
+    /*
+      Map through the input array in state
+      Call make axios requests for each friend to be added to the group
+    */
+  }
+
   pushToNewMembers(event) {
     /*
       1. Validate that there is only one friend in the list or that the friend selected is valid
