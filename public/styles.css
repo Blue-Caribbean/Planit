@@ -320,3 +320,14 @@ button#caretRight {
   background-color: transparent;
   border: 0px;
 }
+
+#edit-availability {
+  cursor: pointer;
+  width: fit-content;
+  margin-left: 50px;
+}
+
+#show-freetime {
+  cursor: pointer;
+  width: fit-content;
+}

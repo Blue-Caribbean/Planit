@@ -105,10 +105,10 @@ class CalendarComponent extends React.Component {
             <img src="globe.png" alt="planitlogo" className="logo" /> <h1>Planit</h1>
           </div>
           <div className="navbar-show-calendar">
-            <h4 onClick={this.showFreeTime}>Show My Calendar</h4>
+            <h4 id='show-freetime' onClick={this.showFreeTime}>Show My Calendar</h4>
           </div>
           <div className="navbar-edit-calendar">
-            <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
+            <h4 id='edit-availability' onClick={this.updateAvailability}>Edit Availablity</h4>
           </div>
 
           <div className="navbar-edit-avail">
