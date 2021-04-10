@@ -11,7 +11,6 @@ const login = (paramObj, callback) => {
 };
 
 const createUser = (paramObj, callback) => {
-  debugger;
   axios.post('/api/createuser', paramObj)
   .then(callback(null))
   .catch(err => {
@@ -43,6 +42,7 @@ const getGroups = (userId, callback) => {
 }
 
 const updateFreeTime = (userId, freeTime, callback) => {
+  debugger;
   axios.put(`/api/${userId}/updatefreetime`, freeTime)
     .then(() => {
       callback(null);

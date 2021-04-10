@@ -1,6 +1,9 @@
 
 const convertEvents = (array) => {
   const events = array.map((obj, index) => {
+    if (!obj.start_time) {
+      return obj
+    }
     const event = {
       id: index + 1,
       title: obj.event_name,

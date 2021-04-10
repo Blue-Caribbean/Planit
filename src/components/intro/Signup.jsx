@@ -8,7 +8,6 @@ class Signup extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.goBack = this.goBack.bind(this);
     this.signup = this.signup.bind(this);
-    this.signup = this.signup.bind(this);
   }
 
   handleChange(event) {

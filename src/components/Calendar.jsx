@@ -49,10 +49,10 @@ class CalendarComponent extends React.Component {
     const { app } = this.props;
     const { events } = app.state;
     const tempArr = events.slice();
-    tempArr.push({ start, end, title: 'Free Time' });
+    tempArr.push({id: events.length+1, start, end, title: 'Free Time' });
     app.setState({
       events: tempArr,
-    });
+    }, () => {console.log(app.state)});
   }
 
   showMyCalendarHandler() {
