@@ -108,7 +108,7 @@ class CalendarComponent extends React.Component {
             <h4 id='show-freetime' onClick={this.showFreeTime}>Show My Calendar</h4>
           </div>
           <div className="navbar-edit-calendar">
-            <h4 id='edit-availability' onClick={this.updateAvailability}>Edit Availablity</h4>
+            <h4 id='edit-availability' onClick={this.showMyCalendarHandler}>Edit Availablity</h4>
           </div>
 
           <div className="navbar-edit-avail">

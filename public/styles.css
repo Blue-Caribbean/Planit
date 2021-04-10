@@ -56,6 +56,10 @@ Appjsx grid
   grid-row: 2;
 }
 
+.rbc-toolbar-label {
+  font-family: 'Ubuntu', sans-serif;
+}
+
 .rbc-calendar {
   grid-row: 2;
   grid-column: 2;
@@ -322,12 +326,14 @@ button#caretRight {
 }
 
 #edit-availability {
+  font-family: 'Ubuntu', sans-serif;
   cursor: pointer;
   width: fit-content;
   margin-left: 50px;
 }
 
 #show-freetime {
+  font-family: 'Ubuntu', sans-serif;
   cursor: pointer;
   width: fit-content;
 }
