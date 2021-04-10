@@ -266,8 +266,8 @@ class EventsUpcoming extends React.Component {
       <div className="EventsUpcoming">
         <div id="eventsNavigateLeft">
           <button type="submit" id="caretLeft" onClick={this.leftNavigationalCaretClick}>
-            {' < '}
-            {/* <img src="./img/iconfinder_caret-left.png" alt="iconCaretLeft" id="iconCaretLeft" /> */}
+            {/* {' < '} */}
+            <img src="iconfinder_caret-left.png" alt="iconCaretLeft" id="iconCaretLeft" />
           </button>
         </div>
         <div className="eventsTiles">
@@ -278,34 +278,43 @@ class EventsUpcoming extends React.Component {
               return (
                 <div key={event.event_id} id="eventTile">
                   {/* <li key={event.event_id} id="eventTile"> */}
-                  <span id="tileDateBox">
-                    {`${moment(event.start_time).format('MMM')} ${event.start_time.slice(8, 10)}`}
-                    {/* <br></br>
-                      {`${moment(event.start_time).format('MMM')}`} */}
-                    {/* <br></br> */}
-                  </span>
-                  <span id="tileInfoList">
-                    {`Event: ${event.event_name}`}
-                    {/* <br></br> */}
-                    {`${moment(event.start_time).format('hh:MM a')}`}
-                    {/* {`${moment(event.start_time.slice(11, 16), 'HH:mm').format('h:mm a')}`} */}
-                    {/* <br></br> */}
-                    {`Group: ${event.group_name}`}
-                    {/* <br></br> a*/}
-                  </span>
-                  <br />
-                  <span id="tileRsvpButtonYes">
-                    <button type="submit" id="tileRsvpYes" onClick={this.manageRsvpClickEvent}>
-                      <div>{'RSVP'}</div>
-                      <div>{'YES'}</div>
+                  <div id="tileDateBox">
+                    <button type="submit" id="dateBoxBsButton">
+                      <span id="dateBoxDay">
+                        {`${event.start_time.slice(8, 10)}`}
+                      </span>
+                      <span id="dateBoxMonth">
+                        {`${moment(event.start_time).format('MMM')}`}
+                        {/* {`${moment(event.start_time).format('MMM')}`} */}
+                      </span>
                     </button>
-                  </span>
-                  <span id="tileRsvpButtonNo">
-                    <button type="submit" id="tileRsvpNo" onClick={this.manageRsvpClickEvent}>
-                      <div>{'RSVP'}</div>
-                      <div>{'NO'}</div>
-                    </button>
-                  </span>
+                  </div>
+                  <div id="tileInfoList">
+                    <span id="infoListEvent">
+                      {`${event.event_name}`}
+                    </span>
+                    <span id="infoListTimeStart">
+                      {`${moment(event.start_time).format('h:MM a')}`}
+                      {/* {`${moment(event.start_time.slice(11, 16), 'HH:mm').format('h:mm a')}`} */}
+                    </span>
+                    <span id="infoListGroup">
+                      {`Group: ${event.group_name}`}
+                    </span>
+                  </div>
+                  <div id="tileRsvpButtons">
+                    <span id="tileRsvpButtonYes">
+                      <button type="submit" id="tileRsvpYes" onClick={this.manageRsvpClickEvent}>
+                        <div>{'RSVP'}</div>
+                        <div>{'YES'}</div>
+                      </button>
+                    </span>
+                    <span id="tileRsvpButtonNo">
+                      <button type="submit" id="tileRsvpNo" onClick={this.manageRsvpClickEvent}>
+                        <div>{'RSVP'}</div>
+                        <div>{'NO'}</div>
+                      </button>
+                    </span>
+                  </div>
                   {/* </li> */}
                 </div>
               );
@@ -316,19 +325,29 @@ class EventsUpcoming extends React.Component {
             if (event.accepted === 1) {
               return (
                 <li key={event.event_id} id="eventTile">
-                  <span id="tileDateBox">
-                    {`${event.start_time.slice(8, 10)}`}
-                    <br></br>
-                    {`${moment.monthsShort(Number(event.start_time.slice(5, 7)) - 1)}`}
-                    <br></br>
-                  </span>
-                  <span id="tileInfoList">
-                    {`${event.name}`}
-                    <br></br>
-                    {`${moment(event.start_time).format('hh:MM a')}`}
-                    <br></br>
-                    {`${event.group_name}`}
-                  </span>
+                  <div id="tileDateBox">
+                    <button type="submit" id="dateBoxBsButton">
+                      <div id="dateBoxDay">
+                        {`${event.start_time.slice(8, 10)}`}
+                      </div>
+                      <div id="dateBoxMonth">
+                        {`${moment(event.start_time).format('MMM')}`}
+                        {/* {`${moment(event.start_time).format('MMM')}`} */}
+                      </div>
+                    </button>
+                  </div>
+                  <div id="tileInfoList">
+                    <span id="infoListEvent">
+                      {`${event.event_name}`}
+                    </span>
+                    <span id="infoListTimeStart">
+                      {`${moment(event.start_time).format('h:MM a')}`}
+                      {/* {`${moment(event.start_time.slice(11, 16), 'HH:mm').format('h:mm a')}`} */}
+                    </span>
+                    <span id="infoListGroup">
+                      {`Group: ${event.group_name}`}
+                    </span>
+                  </div>
                 </li>
               );
             }
@@ -337,8 +356,8 @@ class EventsUpcoming extends React.Component {
         </div>
         <div id="eventsNavigateRight">
           <button type="submit" id="caretRight" onClick={this.rightNavigationalCaretClick}>
-            {' > '}
-            {/* <img src="./img/iconfinder_caret-right.png" alt="iconCaretRight" id="iconCaretRight" /> */}
+            {/* {' > '} */}
+            <img src="iconfinder_caret-right.png" alt="iconCaretRight" id="iconCaretRight" />
           </button>
         </div>
       </div>
