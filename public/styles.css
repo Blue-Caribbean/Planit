@@ -158,37 +158,94 @@ events upcoming
   justify-content: center;
   margin-top: 10%; */
   display: grid;
-  grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: 40px, minmax(169px, 175px), 35px;
+  /* grid-template-columns: 20%, 60%, 20%; */
+  /* grid-template-columns: 19.5%, 54.5%, 13%, 13%; */
+  grid-template-rows: 100%;
   gap: 2px;
 }
 
 #tileDateBox {
   grid-column: 1;
   grid-row: 1;
+  width: 40px;
   background-color: transparent;
   border: 5px;
   border-color: white;
   border-radius: 7px;
-  font-size: large;
   text-align: center;
+  font-size: large;
+  display: grid;
+  grid-template-columns: 40px;
+  grid-template-rows: 60%, 40%;
+}
+button#dateBoxBsButton {
+  width: 40px;
+  background-color: #e7f3e9;
+  border: 5px;
+  border-color: white;
+  border-radius: 7px;
+}
+#dateBoxDay {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: x-large;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: center;
+}
+#dateBoxMonth {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: large;
+  display: flex;
+  align-items: flex-start;
   justify-content: center;
 }
 
 #tileInfoList {
-  grid-column: 2/5;
+  grid-column: 2;
   grid-row: 1;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50%, 25%, 25%;
   font-size: small;
+}
+#infoListEvent {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: larger;
+  display: flex;
+  align-items: flex-end;
+  justify-content: left;
+}
+#infoListTimeStart {
+  grid-column: 1;
+  grid-row: 2;
   display: flex;
   align-items: center;
   justify-content: left;
 }
+#infoListGroup {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+}
 
-#tileRsvpButtonYes {
-  grid-column: 5;
+#tileRsvpButtons {
+  grid-column: 3;
   grid-row: 1;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50%, 50%;
+  gap: 4px;
+}
+#tileRsvpButtonYes {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: small;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,11 +255,12 @@ button#tileRsvpYes {
   border: 5px;
   border-color: #a494aa;
   border-radius: 7px;
+  cursor: pointer;
 }
-
 #tileRsvpButtonNo {
-  grid-column: 6;
-  grid-row: 1;
+  grid-column: 1;
+  grid-row: 2;
+  font-size: small;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,6 +270,7 @@ button#tileRsvpNo {
   border: 5px;
   border-color: #ac8c8e;
   border-radius: 7px;
+  cursor: pointer;
 }
 
 #eventsNavigateLeft {
@@ -227,6 +286,7 @@ button#tileRsvpNo {
 button#caretLeft {
   background-color: transparent;
   border: 0px;
+  cursor: pointer;
 }
 #iconCaretLeft {
   width: 20px;
@@ -246,6 +306,7 @@ button#caretLeft {
 button#caretRight {
   background-color: transparent;
   border: 0px;
+  cursor: pointer;
 }
 #iconCaretRight {
   width: 20px;
