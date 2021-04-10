@@ -81,7 +81,6 @@ app.put('/api/:userid/updatefreetime', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      debugger;
       res.status(200).end()
     }
   });
