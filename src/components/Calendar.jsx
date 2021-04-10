@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import requests from '../../functions/requests';
-import { convertFreeTime } from '../../functions/helpers';
+import { convertFreeTime, convertEvents } from '../../functions/helpers';
 
 const localizer = momentLocalizer(moment);
 
@@ -111,7 +111,7 @@ class CalendarComponent extends React.Component {
           selectable={canEdit}
           localizer={localizer}
           defaultView={Views.WEEK}
-          events={events}
+          events={convertEvents(events)}
           startAccessor="start"
           endAccessor="end"
           style={{ height: '430px', width: '70%' }}
