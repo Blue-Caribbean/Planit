@@ -42,7 +42,6 @@ const getGroups = (userId, callback) => {
 }
 
 const updateFreeTime = (userId, freeTime, callback) => {
-  debugger;
   axios.put(`/api/${userId}/updatefreetime`, freeTime)
     .then(() => {
       callback(null);

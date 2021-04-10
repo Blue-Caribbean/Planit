@@ -35,12 +35,14 @@ class CalendarComponent extends React.Component {
   onSubmit() {
     const { events, user, app } = this.props;
     const { prevEvents } = this.state;
+    const self = this;
     requests.updateFreeTime(user.id, events, (err) => {
       if (err) {
         console.error(err);
       } else {
-
-    app.setState({ events: prevEvents}, this.setState({ canEdit: false }))
+        app.setState({ events: prevEvents}, () => {
+          self.setState({ canEdit: false })
+        });
       }
     });
   }
@@ -115,7 +117,7 @@ class CalendarComponent extends React.Component {
                 <button type="submit" onClick={this.onCancel}>
                   Cancel
                 </button>
-                <button type="submit" onClick={this.onSubmit}>
+                <button type="button" onClick={this.onSubmit}>
                   Submit
                 </button>
               </>
