@@ -127,7 +127,9 @@ class AddFriendsToGroup extends React.Component {
     }
     return (
       <div id="addFriendsToGroupContainer">
-        <button onClick={this.openModal}>+</button>
+        <div className="AddFriendsButton">
+          <button onClick={this.openModal}>{`Add friends to: ${this.props.clicked}`}</button>
+        </div>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
           <h2>Add Friends to {clicked}</h2>
           <input type="text" placeholder="Search Friends" onChange={this.handleChange} />

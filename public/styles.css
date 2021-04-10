@@ -126,7 +126,87 @@ side bar
 #sidebarContainer {
   grid-row: 2;
 }
+.sidebarList {
+  font-family: 'Open Sans', sans-serif;
+}
 
+.group-list-item {
+  margin-top: 10px;
+}
+
+#modalDiv {
+  display: flex;
+  justify-content: center;
+}
+#modalDiv button {
+  margin-top: 10%;
+  background-color: #912e2e;
+  border: none;
+  color: white;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px;
+  border-radius: 10px;
+}
+.sidebarbuttons {
+  display: flex;
+  justify-content: center;
+}
+.sidebarbuttons button {
+  width: 50%;
+  margin-top: 10%;
+  background-color: #b7c0ee;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  color: black;
+}
+.addEventContainer {
+  display: flex;
+  justify-content: center;
+}
+.AddFriendsButton button {
+  width: 100%;
+  margin-top: 10%;
+  background-color: #b7c0ee;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px;
+
+  border-radius: 10px;
+
+  font-size: 1em;
+}
+.addEventContainer button {
+  width: 100%;
+  margin-top: 10%;
+  background-color: #b7c0ee;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px;
+
+  border-radius: 10px;
+
+  font-size: 1em;
+}
 /*
 ================
 events upcoming
