@@ -51,10 +51,10 @@ const updateFreeTime = (userId, freeTime) => {
 };
 
 const createGroup = (userId, groupObj) => {
-  //give user id and group obj formatted like the group schema
+  // give user id and group obj formatted like the group schema
   axios({
     method: 'post',
-    url: `/api/${userid}/creategroup`,
+    url: `/api/${userId}/creategroup`,
     data: groupObj
   })
 }
