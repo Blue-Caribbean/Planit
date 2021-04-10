@@ -326,14 +326,26 @@ button#caretRight {
 }
 
 #edit-availability {
+  color: blue;
   font-family: 'Ubuntu', sans-serif;
   cursor: pointer;
   width: fit-content;
   margin-left: 50px;
+  transition: 200ms ease-out;
+}
+
+#edit-availability:hover {
+  color: lightblue;
 }
 
 #show-freetime {
+  color: blue;
   font-family: 'Ubuntu', sans-serif;
   cursor: pointer;
   width: fit-content;
+  transition: 200ms ease-out;
+}
+
+#show-freetime:hover {
+  color: lightblue;
 }
