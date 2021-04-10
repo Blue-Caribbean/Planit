@@ -131,7 +131,7 @@ class CalendarComponent extends React.Component {
           events={convertEvents(events)}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: '430px', width: '70%' }}
+          style={{ height: '430px', width: '90%' }}
           onSelectEvent={(event) => alert(`${event.title}, start: ${event.start}`)}
           onSelectSlot={this.onChange}
         />

@@ -118,7 +118,7 @@ const updateFreeTime = (userId, freeTimeArray, cb) => {
       cb(err, null);
     } else {
       // Another slow query here. It might make more sense to use 2d array. [[date start, date end],] timestamp[][]
-      Promise.all(freeTimeArray.forEach(async (obj) => {
+      Promise.all(freeTimeArray.map(async (obj) => {
         await pg.pool.query(
           'INSERT INTO freetime (user_id, start, end_time) VALUES ($1, $2, $3)',
           [userId, obj.start, obj.end],
