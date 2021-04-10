@@ -54,7 +54,7 @@ class CalendarComponent extends React.Component {
     tempArr.push({id: events.length+1, start, end, title: 'Free Time' });
     app.setState({
       events: tempArr,
-    }, () => {console.log(app.state)});
+    });
   }
 
   showMyCalendarHandler() {
@@ -105,10 +105,10 @@ class CalendarComponent extends React.Component {
             <img src="globe.png" alt="planitlogo" className="logo" /> <h1>Planit</h1>
           </div>
           <div className="navbar-show-calendar">
-            <h4 id='show-freetime' onClick={this.showFreeTime}>Show My Calendar</h4>
+            <h4 id='show-freetime' onClick={this.showMyCalendarHandler}>Show My Calendar</h4>
           </div>
           <div className="navbar-edit-calendar">
-            <h4 id='edit-availability' onClick={this.showMyCalendarHandler}>Edit Availablity</h4>
+            <h4 id='edit-availability' onClick={this.updateAvailability}>Edit Availablity</h4>
           </div>
 
           <div className="navbar-edit-avail">
