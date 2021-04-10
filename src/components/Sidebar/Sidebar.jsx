@@ -72,27 +72,33 @@ class Sidebar extends React.Component {
 
   render() {
     const { groups, friends, groupsSelected, searchTerm } = this.state;
-    let friendsColor = 'red';
+    let friendsColor = '#912e2e';
     let groupsColor = 'white';
     console.log(groups);
     if (groupsSelected === true) {
       friendsColor = 'white';
-      groupsColor = 'red';
+      groupsColor = '#912e2e';
     }
     return (
       <div id="sidebarContainer">
-        <button type="button" onClick={this.handleToggle} style={{ backgroundColor: groupsColor }}>
-          Groups
-        </button>
-        <button
-          type="button"
-          id="friendsButton"
-          onClick={this.handleToggle}
-          color={friendsColor}
-          style={{ backgroundColor: friendsColor }}
-        >
-          Friends
-        </button>
+        <div className="sidebarbuttons">
+          <button
+            type="button"
+            onClick={this.handleToggle}
+            style={{ backgroundColor: groupsColor }}
+          >
+            Groups
+          </button>
+          <button
+            type="button"
+            id="friendsButton"
+            onClick={this.handleToggle}
+            color={friendsColor}
+            style={{ backgroundColor: friendsColor }}
+          >
+            Friends
+          </button>
+        </div>
         <PlusButton friends={friends} groups={groups} isGroupsSelected={groupsSelected} />
         <SidebarList friends={friends} groups={groups} isGroupsSelected={groupsSelected} />
       </div>

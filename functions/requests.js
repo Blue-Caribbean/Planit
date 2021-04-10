@@ -1,53 +1,62 @@
 const axios = require('axios');
 
 const login = (paramObj, callback) => {
-  axios.post('/api/auth', paramObj)
+  axios
+    .post('/api/auth', paramObj)
     .then((data) => {
       callback(null, data.data);
-  })
-    .catch(err => {
-      callback(err)
     })
+    .catch((err) => {
+      callback(err);
+    });
 };
 
 const createUser = (paramObj, callback) => {
-  debugger;
-  axios.post('/api/createuser', paramObj)
-  .then(callback(null))
-  .catch((err) => {callback(err)})
+  axios
+    .post('/api/createuser', paramObj)
+    .then(callback(null))
+    .catch((err) => {
+      callback(err);
+    });
 };
 
 const getFriends = (userId, callback) => {
   //give me the user Id
+
   axios({
     url: `/api/${userId}/friends`,
-    method: 'get'
-  }).then((data) => {
-    callback(null, data.data.rows);
-  }).catch((err) => {
-    callback(err, null);
+    method: 'get',
   })
-}
+    .then((data) => {
+      callback(null, data.data.rows);
+    })
+    .catch((err) => {
+      callback(err, null);
+    });
+};
 
 const getGroups = (userId, callback) => {
   axios({
     url: `/api/${userId}/groups`,
-    method: 'get'
-  }).then((data) => {
-    callback(null, data.data.rows);
-  }).catch((err) => {
-    callback(err, null);
+    method: 'get',
   })
-}
-
-const updateFreeTime = (userId, freeTime) => {
-  axios.put(`/api/${userId}/updatefreetime`, {freeTime})
-    .then(() => {
-      console.log('done')
+    .then((data) => {
+      callback(null, data.data.rows);
     })
     .catch((err) => {
-      console.error(err);
+      callback(err, null);
+    });
+};
+
+const updateFreeTime = (userId, freeTime, callback) => {
+  axios
+    .put(`/api/${userId}/updatefreetime`, freeTime)
+    .then(() => {
+      callback(null);
     })
+    .catch((err) => {
+      callback(err);
+    });
 };
 
 const createGroup = (userId, groupObj) => {
@@ -55,28 +64,30 @@ const createGroup = (userId, groupObj) => {
   axios({
     method: 'post',
     url: `/api/${userId}/creategroup`,
-    data: groupObj
-  })
-}
-
+    data: groupObj,
+  });
+};
 
 const getUserEvents = (userid, callback) => {
   axios({
     method: 'get',
     url: `/api/${userid}/userevents`,
   })
-  .then((data)=> {
-    callback(null, data.data)
-  })
-  .catch((err)=> {
-    callback(err);
-  })
+    .then((data) => {
+      callback(null, data.data);
+    })
+    .catch((err) => {
+      callback(err);
+    });
 };
 
 const createGroupEvent = (app, groupid, eventsObj, callback) => {
-  axios.post(`/api/${groupid}/event`, eventsObj)
-  .then(callback(null))
-  .catch((err) => {callback(err)})
+  axios
+    .post(`/api/${groupid}/event`, eventsObj)
+    .then(callback(null))
+    .catch((err) => {
+      callback(err);
+    });
 };
 
 module.exports = {
@@ -88,4 +99,4 @@ module.exports = {
   getFriends,
   getGroups,
   createGroupEvent,
-}
+};

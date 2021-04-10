@@ -19,6 +19,7 @@ class AddFriendsToGroup extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.pushToNewMembers = this.pushToNewMembers.bind(this);
     this.handleListClick = this.handleListClick.bind(this);
+    this.AddAllFriends = this.AddAllFriends.bind(this);
   }
 
   handleChange(event) {
@@ -31,7 +32,6 @@ class AddFriendsToGroup extends React.Component {
     /*
       push the clicked item into your array.
     */
-
     const { newMembers } = this.state;
 
     console.log(event.target.key);
@@ -53,6 +53,23 @@ class AddFriendsToGroup extends React.Component {
       Map through the input array in state
       Call make axios requests for each friend to be added to the group
     */
+    const { friends } = this.props;
+    const { newMembers } = this.state;
+    // This is like the grossest possible implementation.
+    const friendObjs = [];
+    newMembers.forEach((name) => {
+      const firstLastName = name.split(' ');
+      const first = firstLastName[0];
+      const last = firstLastName[1];
+      friends.forEach((obj) => {
+        if (obj.first.toLowerCase() === first && obj.last.toLowerCase() === last) {
+          friendObjs.push(obj);
+        }
+      });
+    });
+    // FIXME: make axios request.
+
+    this.closeModal();
   }
 
   pushToNewMembers(event) {
@@ -110,7 +127,9 @@ class AddFriendsToGroup extends React.Component {
     }
     return (
       <div id="addFriendsToGroupContainer">
-        <button onClick={this.openModal}>+</button>
+        <div className="AddFriendsButton">
+          <button onClick={this.openModal}>{`Add friends to: ${this.props.clicked}`}</button>
+        </div>
         <Modal isOpen={modalIsOpen} onRequestClose={this.closeModal}>
           <h2>Add Friends to {clicked}</h2>
           <input type="text" placeholder="Search Friends" onChange={this.handleChange} />
@@ -130,7 +149,7 @@ class AddFriendsToGroup extends React.Component {
                 ))}
             </ul>
           </div>
-          <button>Add All</button>
+          <button onClick={this.AddAllFriends}>Add All</button>
           <div className="addedFriends">
             <ul>
               {newMembers.map((friend) => (

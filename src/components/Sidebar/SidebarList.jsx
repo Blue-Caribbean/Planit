@@ -45,7 +45,12 @@ class SidebarList extends React.Component {
     return (
       <div className="sidebarList">
         {groups.map((group, index) => (
-          <div key={group.group_id} onClick={this.handleClick} name={index}>
+          <div
+            key={group.group_id}
+            className="group-list-item"
+            onClick={this.handleClick}
+            name={index}
+          >
             {group.group_name}
           </div>
         ))}
