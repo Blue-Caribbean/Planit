@@ -56,6 +56,10 @@ Appjsx grid
   grid-row: 2;
 }
 
+.rbc-toolbar-label {
+  font-family: 'Ubuntu', sans-serif;
+}
+
 .rbc-calendar {
   grid-row: 2;
   grid-column: 2;
@@ -94,6 +98,10 @@ login
 .form-buttons-div {
   display: flex;
   justify-content: center;
+}
+
+.form-email {
+  margin-left: 25px;
 }
 
 .form-button {
@@ -315,4 +323,29 @@ button#caretRight {
   height: auto;
   background-color: transparent;
   border: 0px;
+}
+
+#edit-availability {
+  color: blue;
+  font-family: 'Ubuntu', sans-serif;
+  cursor: pointer;
+  width: fit-content;
+  margin-left: 50px;
+  transition: 200ms ease-out;
+}
+
+#edit-availability:hover {
+  color: lightblue;
+}
+
+#show-freetime {
+  color: blue;
+  font-family: 'Ubuntu', sans-serif;
+  cursor: pointer;
+  width: fit-content;
+  transition: 200ms ease-out;
+}
+
+#show-freetime:hover {
+  color: lightblue;
 }
