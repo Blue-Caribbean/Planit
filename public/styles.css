@@ -96,6 +96,10 @@ login
   justify-content: center;
 }
 
+.form-email {
+  margin-left: 25px;
+}
+
 .form-button {
   margin-top: 10%;
   background-color: #912e2e;
