@@ -1,4 +1,3 @@
-
 const mRange = require('moment-range');
 const Moment = require('moment');
 const pg = require('./index.js');
@@ -119,16 +118,16 @@ const updateFreeTime = (userId, freeTimeArray, cb) => {
       cb(err, null);
     } else {
       // Another slow query here. It might make more sense to use 2d array. [[date start, date end],] timestamp[][]
-      freeTimeArray.forEach((obj) => {
+      freeTimeArray.freeTime.forEach((obj) => {
         pg.pool.query(
           'INSERT INTO freetime (user_id, start, end_time) VALUES ($1, $2, $3)',
           [userId, obj.start, obj.end],
           (error, result) => {
-            if (error) {
-              cb(error, null);
-            } else {
-              cb(null, result);
-            }
+            // if (error) {
+            //   cb(error, null);
+            // } else {
+            //   cb(null, result);
+            // }
           }
         );
       });

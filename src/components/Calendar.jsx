@@ -81,6 +81,21 @@ class CalendarComponent extends React.Component {
   render() {
     const { events } = this.props;
     const { canEdit } = this.state;
+    let showingEvents = [];
+
+    if(events.length > 0 && events[0].event_name) {
+      for(let i = 0; i < events.length; i++) {
+        const tempObj = {
+          title: `${events[i].event_name} (${events[i].group_name})`,
+          start: new Date(events[i].end_time),
+          end: new Date(events[i].end_time)
+        }
+        showingEvents.push(tempObj);
+      }
+    } else {
+      showingEvents = events.slice();
+    }
+
     return (
       <>
         <div className="navbar">

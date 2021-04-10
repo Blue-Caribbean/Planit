@@ -38,7 +38,7 @@ class App extends React.Component {
 
   getUserInfo() {
     const { user } = this.state;
-    requests.getUserEvents(this, user.id, (err, data) => {
+    requests.getUserEvents(user.id, (err, data) => {
       this.setState({
         eventsShowing: data,
       });
