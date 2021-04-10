@@ -77,7 +77,7 @@ class CalendarComponent extends React.Component {
     }
 
     return (
-      <div>
+      <>
         <div className="navbar">
           <div className="navbar-logo-div">
             <img src="globe.png" alt="planitlogo" className="logo" /> <h1>Planit</h1>
@@ -113,7 +113,7 @@ class CalendarComponent extends React.Component {
           onSelectEvent={(event) => alert(`${event.title}, start: ${event.start}`)}
           onSelectSlot={this.onChange}
         />
-      </div>
+      </>
     );
   }
 }
