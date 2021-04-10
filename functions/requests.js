@@ -11,10 +11,11 @@ const login = (paramObj, callback) => {
 };
 
 const createUser = (paramObj, callback) => {
-  debugger;
   axios.post('/api/createuser', paramObj)
   .then(callback(null))
-  .catch((err) => {callback(err)})
+  .catch(err => {
+    callback(err)
+  });
 };
 
 const getFriends = (userId, callback) => {
@@ -40,13 +41,13 @@ const getGroups = (userId, callback) => {
   })
 }
 
-const updateFreeTime = (userId, freeTime) => {
-  axios.put(`/api/${userId}/updatefreetime`, {freeTime})
+const updateFreeTime = (userId, freeTime, callback) => {
+  axios.put(`/api/${userId}/updatefreetime`, freeTime)
     .then(() => {
-      console.log('done')
+      callback(null);
     })
     .catch((err) => {
-      console.error(err);
+      callback(err);
     })
 };
 

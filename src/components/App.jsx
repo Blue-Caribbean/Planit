@@ -55,7 +55,7 @@ class App extends React.Component {
   render() {
     const app = this;
     const { user, eventsShowing, events, loggedIn, signup } = this.state;
-    //const { userId } = user;
+    const { id } = user;
     if (!loggedIn) {
       return (
         <div className="login-outer-div">
@@ -67,14 +67,9 @@ class App extends React.Component {
     }
     return (
       <div id="appjsx">
-        <CalendarComponent
-          app={app}
-          events={eventsShowing}
-          getUserInfo={this.getUserInfo}
-          userId={user.id}
-        />
-        <Sidebar userID={user.id} />
-        <EventsUpcoming userId={user.id} events={events} />
+        <CalendarComponent app={app} events={events} getUserInfo={this.getUserInfo} user={user} userId={id} />
+        <Sidebar />
+        <EventsUpcoming userId={id} events={events}/>
       </div>
     );
   }

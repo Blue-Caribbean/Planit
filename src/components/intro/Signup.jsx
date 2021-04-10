@@ -8,7 +8,6 @@ class Signup extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.goBack = this.goBack.bind(this);
     this.signup = this.signup.bind(this);
-    this.signup = this.signup.bind(this);
   }
 
   handleChange(event) {
@@ -31,10 +30,9 @@ class Signup extends React.Component {
       email,
       first,
       last,
-      profilepic:
-        'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png',
+      profilepic: 'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
     };
-    createUser(paramObj, (err) => {
+    createUser( paramObj, (err) => {
       if (err) {
         console.error(err);
       } else {

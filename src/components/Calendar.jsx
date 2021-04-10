@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import requests from '../../functions/requests';
+import { convertFreeTime, convertEvents } from '../../functions/helpers';
 
 const localizer = momentLocalizer(moment);
 
@@ -17,6 +18,7 @@ class CalendarComponent extends React.Component {
     this.onCancel = this.onCancel.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.showMyCalendarHandler = this.showMyCalendarHandler.bind(this);
+    this.showFreeTime = this.showFreeTime.bind(this);
   }
 
   onCancel() {
@@ -25,25 +27,34 @@ class CalendarComponent extends React.Component {
     this.setState(
       { canEdit: false },
       app.setState({
-        eventsShowing: prevEvents,
+        events: prevEvents,
       })
     );
   }
 
   onSubmit() {
-    const { events, userId } = this.props;
-    requests.updateFreeTime(userId, events);
-    this.setState({ canEdit: false });
+    const { events, user, app } = this.props;
+    const { prevEvents } = this.state;
+    const self = this;
+    requests.updateFreeTime(user.id, events, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        app.setState({ events: prevEvents}, () => {
+          self.setState({ canEdit: false })
+        });
+      }
+    });
   }
 
   onChange({ start, end }) {
     const { app } = this.props;
-    const { eventsShowing } = app.state;
-    const tempArr = eventsShowing.slice();
-    tempArr.push({ start, end, title: 'Free Time' });
+    const { events } = app.state;
+    const tempArr = events.slice();
+    tempArr.push({id: events.length+1, start, end, title: 'Free Time' });
     app.setState({
-      eventsShowing: tempArr,
-    });
+      events: tempArr,
+    }, () => {console.log(app.state)});
   }
 
   showMyCalendarHandler() {
@@ -51,15 +62,21 @@ class CalendarComponent extends React.Component {
     getUserInfo();
   }
 
+  showFreeTime() {
+    const { app } = this.props;
+    const { events, user } = app.state;
+    this.setState({prevEvents: events}, app.setState({events: convertFreeTime(user.freetime)}))
+  }
+
   updateAvailability() {
     const { app } = this.props;
-    const { eventsShowing } = app.state;
+    const { events } = app.state;
     this.setState(
       {
-        prevEvents: eventsShowing,
+        prevEvents: events,
         canEdit: true,
       },
-      app.setState({ eventsShowing: [] })
+      app.setState({ events: [] })
     );
   }
 
@@ -88,7 +105,7 @@ class CalendarComponent extends React.Component {
             <img src="globe.png" alt="planitlogo" className="logo" /> <h1>Planit</h1>
           </div>
           <div className="navbar-show-calendar">
-            <h4 onClick={this.showMyCalendarHandler}>Show My Calendar</h4>
+            <h4 onClick={this.showFreeTime}>Show My Calendar</h4>
           </div>
           <div className="navbar-edit-calendar">
             <h4 onClick={this.updateAvailability}>Edit Availablity</h4>
@@ -100,7 +117,7 @@ class CalendarComponent extends React.Component {
                 <button type="submit" onClick={this.onCancel}>
                   Cancel
                 </button>
-                <button type="submit" onClick={this.onSubmit}>
+                <button type="button" onClick={this.onSubmit}>
                   Submit
                 </button>
               </>
@@ -111,7 +128,7 @@ class CalendarComponent extends React.Component {
           selectable={canEdit}
           localizer={localizer}
           defaultView={Views.WEEK}
-          events={showingEvents}
+          events={convertEvents(events)}
           startAccessor="start"
           endAccessor="end"
           style={{ height: '430px', width: '70%' }}
