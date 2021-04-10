@@ -125,16 +125,194 @@ events upcoming
 ================
 */
 .EventsUpcoming {
-  grid-row: 3;
   grid-column: 1/5;
-}
-
-#eventTile {
-  width: 200px;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 3.5%, 93%, 3.5%;
+  grid-template-rows: 2%, 98%;
+  margin-top: 10px;
 }
 
 .eventsTiles {
-  display: flex;
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  /* display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow: scroll; */
+}
+
+#eventTile {
+  width: 250px;
+  background-color: #e7f3e9;
+  border: 3.5px solid #cbf3d2;
+  /* background-color: #a69ff1;
+  border: 2px solid #7067cf; */
+  border-radius: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  /* text-align: left; */
+  /* display: flex;
+  justify-content: center;
+  margin-top: 10%; */
+  display: grid;
+  grid-template-columns: 40px, minmax(169px, 175px), 35px;
+  /* grid-template-columns: 20%, 60%, 20%; */
+  /* grid-template-columns: 19.5%, 54.5%, 13%, 13%; */
+  grid-template-rows: 100%;
+  gap: 2px;
+}
+
+#tileDateBox {
+  grid-column: 1;
+  grid-row: 1;
+  width: 40px;
+  min-width: 40px;
+  background-color: transparent;
+  border: 5px;
+  border-color: white;
+  border-radius: 7px;
+  text-align: center;
+  font-size: large;
+  display: grid;
+  grid-template-columns: 40px;
+  grid-template-rows: 60%, 40%;
+}
+button#dateBoxBsButton {
+  width: 40px;
+  min-width: 40px;
+  background-color: #e7f3e9;
+  border: 5px;
+  border-color: white;
+  border-radius: 7px;
+}
+#dateBoxDay {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: x-large;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+#dateBoxMonth {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: large;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#tileInfoList {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50%, 25%, 25%;
+  font-size: small;
+}
+#infoListEvent {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: larger;
+  display: flex;
+  align-items: flex-end;
+  justify-content: left;
+}
+#infoListTimeStart {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+#infoListGroup {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+}
+
+#tileRsvpButtons {
+  grid-column: 3;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50%, 50%;
+  gap: 4px;
+}
+#tileRsvpButtonYes {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button#tileRsvpYes {
+  background-color: white;
+  border: 5px;
+  border-color: #a494aa;
+  border-radius: 7px;
+  cursor: pointer;
+}
+#tileRsvpButtonNo {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button#tileRsvpNo {
+  background-color: white;
+  border: 5px;
+  border-color: #ac8c8e;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+#eventsNavigateLeft {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* #eventsNavigateLeft {
+  opacity: 0.6;
+} */
+button#caretLeft {
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+}
+#iconCaretLeft {
+  width: 20px;
+  height: auto;
+}
+
+#eventsNavigateRight {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* #eventsNavigateRight {
+  opacity: 0.6;
+} */
+button#caretRight {
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+}
+#iconCaretRight {
+  width: 20px;
+  height: auto;
+  background-color: transparent;
+  border: 0px;
 }
