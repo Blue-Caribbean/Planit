@@ -1,6 +1,6 @@
 # Planit!
 
-Planit: An event planning and calendar app driven by conventient access to timing events in accordance with group availability.
+Planit: An event planning and calendar app driven by convenient access to timing events in accordance with group availability.
 
 ## Team:
 
