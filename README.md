@@ -1,9 +1,11 @@
 # Planit!
 
-We're team Carribbean, and we're comprised of:
+Planit: An event planning and calendar app driven by conventient access to timing events in accordance with group availability.
 
-- [Nick Sabadicci](https://github.com/Symbuh)
-- [Laura Nielson](https://github.com/VioletGlen)
+## Team:
+
+- [Nicholas Sabadicci](https://github.com/Symbuh)
+- [Laura Nielsen](https://github.com/VioletGlen)
 - [Jack Pronske](https://github.com/jackpronske/)
 - [Zachary Shold](https://github.com/Prollux/)
 - [Lerroy Mwaghore](https://github.com/lmwaghore)
@@ -12,11 +14,11 @@ We're team Carribbean, and we're comprised of:
 
 ## Introduction
 
-This was a brief sprint where we created an MVP for an external user.
+This was a brief project to create an MVP for an external user.
 
 ## The App
 
-The external user was looking for an easy to use event planning app. Something that would allow them to invite their friends to the platform, let them briefly input their standard availability, and then see other group members availability. Group members would be able to create events, and invite other friends to events.
+The external user was looking for an easy to use event planning app: a tool to allow them to invite their friends to the platform where each user could briefly input their standard availability, and then see other group members' availability. Users could create, browse, and join groups as well as invite people to groups. Group members would be able to create new events during time blocks with group availability, and invite friends to events.
 
 ## Tech Stack
 
